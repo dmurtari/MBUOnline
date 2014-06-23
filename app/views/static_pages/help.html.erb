@@ -1,2 +1,11 @@
-<h1>StaticPages#help</h1>
-<p>Find me in app/views/static_pages/help.html.erb</p>
+<% provide(:title, "Help") %>
+<div class="jumbotron">
+  <h1>Help with MBU Online</h1>
+
+  <h2>
+    This is where you can sign up and manage your scouts for Merit Badge University
+  </h2>
+
+  <%= link_to "Sign up now!", '#', class: "btn btn-large btn-primary" %>
+</div>
+
