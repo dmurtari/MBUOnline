@@ -16,5 +16,6 @@ class User < ActiveRecord::Base
   # Password for users
   has_secure_password 
   validates :password, length: { minimum: 6 }
+  validates_presence_of :password, :on => :create
 
 end

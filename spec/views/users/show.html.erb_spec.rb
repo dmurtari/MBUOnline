@@ -6,9 +6,11 @@ RSpec.describe "users/show", :type => :view do
       :firstname => "Firstname",
       :lastname => "Lastname",
       :troop => 1,
-      :distric => "District",
+      :district => "District",
       :phone => "Phone",
-      :email => "Email"
+      :email => "hello2@gmail.com",
+      :password => "testpass",
+      :password_confirmation => "testpass"
     ))
   end
 

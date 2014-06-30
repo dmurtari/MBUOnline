@@ -8,7 +8,9 @@ RSpec.describe "users/edit", :type => :view do
       :troop => 1,
       :district => "MyString",
       :phone => "MyString",
-      :email => "MyString"
+      :email => "hello2@gmail.com",
+      :password => "testpass",
+      :password_confirmation => "testpass"
     ))
   end
 
