@@ -4,7 +4,7 @@ class CreateUsers < ActiveRecord::Migration
       t.string :firstname
       t.string :lastname
       t.integer :troop
-      t.string :distric
+      t.string :district
       t.string :phone
       t.string :email
 
