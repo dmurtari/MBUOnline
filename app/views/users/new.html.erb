@@ -7,41 +7,41 @@
 
   <div class="panel panel-default">
     
-<div class="panel-heading">
-    <p>Sign up for a new account with MBU Online. All fields are required</p>
+    <div class="panel-heading">
+        <p>Sign up for a new account with MBU Online. All fields are required</p>
+    </div>
+    <div class="panel-body">  
+    <%= form_for(@user) do |f| %>
+      <%= render 'shared/error_messages' %>
+
+      <div class="form-group col-md-6">
+        <%= f.label :firstname, "First Name" %>
+        <%= f.text_field :firstname, class: "form-control", placeholder: "Enter your first name" %>
+      </div>
+      <div class="form-group col-md-6">
+        <%= f.label :lastname, "Last Name" %>
+        <%= f.text_field :lastname, class: "form-control", placeholder: "Enter your last name" %>
+      </div>
+
+      <div class="form-group col-md-6">  
+        <%= f.label :email %>
+        <%= f.email_field :email, class: "form-control", placeholder: "you@example.com" %>
+      </div>
+      <div class="form-group col-md-6">
+        <%= f.label :phone, "Phone Number" %>
+        <%= f.telephone_field :phone, class: "form-control", placeholder: "(555) 555-5555" %>
+      </div>
+
+      <div class="form-group col-md-6">
+        <%= f.label :password %>
+        <%= f.password_field :password, class: "form-control", placeholder: "Password" %>
+      </div>
+      <div class="form-group col-md-6">
+        <%= f.label :password_confirmation, "Confirmation" %>
+        <%= f.password_field :password_confirmation, class: "form-control", placeholder: "Password Confirmation" %>
+      </div>
+    </div>
   </div>
-<div class="panel-body">  
-  <%= form_for(@user) do |f| %>
-    <%= render 'shared/error_messages' %>
-
-    <div class="form-group col-md-6">
-      <%= f.label :firstname, "First Name" %>
-      <%= f.text_field :firstname, class: "form-control", placeholder: "Enter your first name" %>
-    </div>
-    <div class="form-group col-md-6">
-      <%= f.label :lastname, "Last Name" %>
-      <%= f.text_field :lastname, class: "form-control", placeholder: "Enter your last name" %>
-    </div>
-
-    <div class="form-group col-md-6">  
-      <%= f.label :email %>
-      <%= f.text_field :email, class: "form-control", placeholder: "you@example.com" %>
-    </div>
-    <div class="form-group col-md-6">
-      <%= f.label :phone, "Phone Number" %>
-      <%= f.text_field :phone, class: "form-control", placeholder: "(555) 555-5555" %>
-    </div>
-
-    <div class="form-group col-md-6">
-      <%= f.label :password %>
-      <%= f.password_field :password, class: "form-control", placeholder: "Password" %>
-    </div>
-    <div class="form-group col-md-6">
-      <%= f.label :password_confirmation, "Confirmation" %>
-      <%= f.password_field :password_confirmation, class: "form-control", placeholder: "Password Confirmation" %>
-    </div>
-    </div>
-    </div>
-    <%= f.submit "Create my account", class: "btn btn-md center-block" %>
+  <%= f.submit "Create my account", class: "btn btn-md center-block" %>
   <% end %>
 </div>

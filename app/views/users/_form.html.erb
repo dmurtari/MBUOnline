@@ -2,42 +2,36 @@
   <%= form_for(@user) do |f| %>
     <% if @user.errors.any? %>
       <%= render 'shared/error_messages' %>
-
-    <div class="row">
-      <div class="field col-md-6">
-        <%= f.label :firstname %><br>
-        <%= f.text_field :firstname %>
-      </div>
-      <div class="field col-md-6">
-        <%= f.label :lastname %><br>
-        <%= f.text_field :lastname %>
-      </div>
+    <% end %>
+    <div class="form-group col-md-6">
+      <%= f.label :firstname, "First Name" %>
+      <%= f.text_field :firstname, class: "form-control", placeholder: "Enter your first name" %>
+    </div>
+    <div class="form-group col-md-6">
+      <%= f.label :lastname, "Last Name" %>
+      <%= f.text_field :lastname, class: "form-control", placeholder: "Enter your last name" %>
     </div>
 
-    <div class="row">
-      <div class="field col-md-6">
-        <%= f.label :troop %><br>
-        <%= f.number_field :troop %>
-      </div>
-      <div class="field col-md-6">
-        <%= f.label :district %><br>
-        <%= f.text_field :district %>
-      </div>
+    <div class="form-group col-md-6">  
+      <%= f.label :email %>
+      <%= f.email_field :email, class: "form-control", placeholder: "you@example.com" %>
+    </div>
+    <div class="form-group col-md-6">
+      <%= f.label :phone, "Phone Number" %>
+      <%= f.telephone_field :phone, class: "form-control", placeholder: "(555) 555-5555" %>
     </div>
 
-    <div class="row">
-      <div class="field col-md-6">
-        <%= f.label :phone %><br>
-        <%= f.text_field :phone %>
-      </div>
-      <div class="field col-md-6">
-        <%= f.label :email %><br>
-        <%= f.text_field :email %>
-      </div>
+    <div class="form-group col-md-6">
+      <%= f.label :troop %>
+      <%= f.number_field :troop, class: "form-control", placeholder: "Troop number" %>
+    </div>
+    <div class="form-group col-md-6">
+      <%= f.label :district %>
+      <%= f.text_field :district, class: "form-control", placeholder: "District" %>
     </div>
     
     <div class="actions">
-      <%= f.submit %>
+      <%= f.submit "Save changes", class: "btn btn-med center-block" %>
     </div>
   <% end %>
 </div>
