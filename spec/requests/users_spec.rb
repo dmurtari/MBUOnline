@@ -16,5 +16,34 @@ RSpec.describe "Users", :type => :request do
 
     it { should have_content('Sign up') }
     it { should have_title(full_title('Sign up')) }
+  end 
+
+  describe "signup" do
+
+    before { visit signup_path }
+
+    let(:submit) { "Create my account" }
+
+    describe "with invalid information" do
+      it "should not create a user" do
+        expect { click_button submit }.not_to change(User, :count)
+      end
+    end
+
+    describe "with valid information" do
+      before do
+        fill_in "First Name", with: "Foo"
+        fill_in "Last Name", with: "Bar"
+        fill_in "Email", with: "foo@bar.com"
+        fill_in "Phone Number", with: "555-555-5555"
+        fill_in "Password", with: "foobar"
+        fill_in "Confirmation", with: "foobar"
+      end
+
+      it "should create a user" do
+        expect { click_button submit }.to change(User, :count).by(1)
+      end
+    end
   end
+
 end
