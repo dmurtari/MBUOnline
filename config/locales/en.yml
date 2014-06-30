@@ -21,3 +21,10 @@
 
 en:
   hello: "Hello world"
+  activerecord: 
+    attributes:
+      user:
+        firstname: "First name"
+        lastname: "Last name"
+        email: "Email address"
+        phone: "Phone number"

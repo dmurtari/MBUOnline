@@ -1,7 +1,5 @@
 @import "bootstrap";
 
-/* mixins, variables, etc. */
-
 $grayMediumLight: #eaeaea;
 
 @mixin box_sizing {
@@ -9,6 +7,13 @@ $grayMediumLight: #eaeaea;
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
 }
+
+/* Navbar */
+
+.logo {
+  color: #FFFFFF;
+}
+
 
 /* Miscellaneous */
 
@@ -18,4 +23,12 @@ $grayMediumLight: #eaeaea;
   width: 100%;
   margin-top: 45px;
   @include box_sizing;
+}
+
+/* Forms */
+
+.field_with_errors {
+  @extend .has-error;
+  width: 100%;
+  display: inline-block;
 }
