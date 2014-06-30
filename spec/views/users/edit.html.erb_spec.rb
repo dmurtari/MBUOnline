@@ -6,7 +6,7 @@ RSpec.describe "users/edit", :type => :view do
       :firstname => "MyString",
       :lastname => "MyString",
       :troop => 1,
-      :distric => "MyString",
+      :district => "MyString",
       :phone => "MyString",
       :email => "MyString"
     ))
@@ -23,7 +23,7 @@ RSpec.describe "users/edit", :type => :view do
 
       assert_select "input#user_troop[name=?]", "user[troop]"
 
-      assert_select "input#user_distric[name=?]", "user[distric]"
+      assert_select "input#user_district[name=?]", "user[district]"
 
       assert_select "input#user_phone[name=?]", "user[phone]"
 

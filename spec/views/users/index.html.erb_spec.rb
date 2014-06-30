@@ -7,7 +7,7 @@ RSpec.describe "users/index", :type => :view do
         :firstname => "Firstname",
         :lastname => "Lastname",
         :troop => 1,
-        :distric => "Distric",
+        :district => "Distric",
         :phone => "Phone",
         :email => "Email"
       ),
@@ -15,7 +15,7 @@ RSpec.describe "users/index", :type => :view do
         :firstname => "Firstname",
         :lastname => "Lastname",
         :troop => 1,
-        :distric => "Distric",
+        :district => "Distric",
         :phone => "Phone",
         :email => "Email"
       )
@@ -27,7 +27,7 @@ RSpec.describe "users/index", :type => :view do
     assert_select "tr>td", :text => "Firstname".to_s, :count => 2
     assert_select "tr>td", :text => "Lastname".to_s, :count => 2
     assert_select "tr>td", :text => 1.to_s, :count => 2
-    assert_select "tr>td", :text => "Distric".to_s, :count => 2
+    assert_select "tr>td", :text => "District".to_s, :count => 2
     assert_select "tr>td", :text => "Phone".to_s, :count => 2
     assert_select "tr>td", :text => "Email".to_s, :count => 2
   end

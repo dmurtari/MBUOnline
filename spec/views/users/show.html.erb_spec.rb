@@ -6,7 +6,7 @@ RSpec.describe "users/show", :type => :view do
       :firstname => "Firstname",
       :lastname => "Lastname",
       :troop => 1,
-      :distric => "Distric",
+      :distric => "District",
       :phone => "Phone",
       :email => "Email"
     ))
@@ -17,7 +17,7 @@ RSpec.describe "users/show", :type => :view do
     expect(rendered).to match(/Firstname/)
     expect(rendered).to match(/Lastname/)
     expect(rendered).to match(/1/)
-    expect(rendered).to match(/Distric/)
+    expect(rendered).to match(/District/)
     expect(rendered).to match(/Phone/)
     expect(rendered).to match(/Email/)
   end
