@@ -1,41 +1,52 @@
-<%= form_for(@user) do |f| %>
-  <% if @user.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
+<div class="container">
+  <%= form_for(@user) do |f| %>
+    <% if @user.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
 
-      <ul>
-      <% @user.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
+        <ul>
+        <% @user.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <div class="row">
+      <div class="field col-md-6">
+        <%= f.label :firstname %><br>
+        <%= f.text_field :firstname %>
+      </div>
+      <div class="field col-md-6">
+        <%= f.label :lastname %><br>
+        <%= f.text_field :lastname %>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="field col-md-6">
+        <%= f.label :troop %><br>
+        <%= f.number_field :troop %>
+      </div>
+      <div class="field col-md-6">
+        <%= f.label :district %><br>
+        <%= f.text_field :district %>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="field col-md-6">
+        <%= f.label :phone %><br>
+        <%= f.text_field :phone %>
+      </div>
+      <div class="field col-md-6">
+        <%= f.label :email %><br>
+        <%= f.text_field :email %>
+      </div>
+    </div>
+    
+    <div class="actions">
+      <%= f.submit %>
     </div>
   <% end %>
-
-  <div class="field">
-    <%= f.label :firstname %><br>
-    <%= f.text_field :firstname %>
-  </div>
-  <div class="field">
-    <%= f.label :lastname %><br>
-    <%= f.text_field :lastname %>
-  </div>
-  <div class="field">
-    <%= f.label :troop %><br>
-    <%= f.number_field :troop %>
-  </div>
-  <div class="field">
-    <%= f.label :district %><br>
-    <%= f.text_field :district %>
-  </div>
-  <div class="field">
-    <%= f.label :phone %><br>
-    <%= f.text_field :phone %>
-  </div>
-  <div class="field">
-    <%= f.label :email %><br>
-    <%= f.text_field :email %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
-<% end %>
+</div>
