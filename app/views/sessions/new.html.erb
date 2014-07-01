@@ -6,10 +6,12 @@
 <div class="span6 offset3" style="text-align:center">
   <%= form_for(:session, url: sessions_path) do |f| %>
     <div class="form-group col-md-6">
+      <%= f.label :email, class: "hide" %>
       <%= f.text_field :email, class: "form-control", placeholder: "Email Address" %>
     </div>
 
     <div class="form-group col-md-6">
+      <%= f.label :password, class: "hide" %>
       <%= f.password_field :password, class: "form-control", placeholder: "Password"  %>
     </div>
 

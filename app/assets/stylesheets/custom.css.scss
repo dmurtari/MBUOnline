@@ -28,6 +28,10 @@ $grayMediumLight: #eaeaea;
 
 /* Forms */
 
+#hide { 
+  display: none;
+}
+
 .field_with_errors {
   @extend .has-error;
   width: 100%;

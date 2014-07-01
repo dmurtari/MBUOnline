@@ -15,12 +15,7 @@ RSpec.describe "Users", :type => :request do
     before { visit signup_path }
 
     it { should have_content('Sign up') }
-    it { should have_title(full_title('Sign up')) }
-  end 
-
-  describe "signin" do
-
-    before { visit signup_path }
+    it { should have_title(full_title('Sign up')) } 
 
     let(:submit) { "Create my account" }
 
@@ -64,13 +59,12 @@ RSpec.describe "Users", :type => :request do
     before { visit edit_user_path(user) }
 
     describe "page" do
-      it { should have_content("Update #{user.firstname}'s Profile") }
-      it { should have_title("Update User") }
+      it { should have_content("Update Profile") }
+      it { should have_title(full_title("Update User")) }
     end
 
     describe "with invalid information" do
       before { click_button "Save changes" }
-
       it { should have_content('error') }
     end
   end
