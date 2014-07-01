@@ -1,36 +1,54 @@
 <p id="notice"><%= notice %></p>
 <% provide(:title, "#{@user.firstname} #{@user.lastname}") %>
 
+<div class="page-header">
+  <h1>Details about <%= @user.firstname %></h1>
+</div>
 
-<p>
-  <strong>First Name:</strong>
-  <%= @user.firstname %>
-</p>
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <% if current_user?(@user) %>
+      <h3 class="panel-title">Your information 
+      <%= link_to 'Edit', edit_user_path(@user), class: "btn btn-xs btn-default" %> </h3>
+    <% else %>
+      <h3 class="panel-title"><%= @user.firstname %>'s information</h3>
+    <% end %>
+  </div>
+  <div class="panel-body">
+    <p>
+      <strong>First Name:</strong>
+      <%= @user.firstname %>
+    </p>
 
-<p>
-  <strong>Last Name:</strong>
-  <%= @user.lastname %>
-</p>
+    <p>
+      <strong>Last Name:</strong>
+      <%= @user.lastname %>
+    </p>
 
-<p>
-  <strong>Troop:</strong>
-  <%= @user.troop %>
-</p>
+    <p>
+      <strong>Troop:</strong>
+      <%= @user.troop %>
+    </p>
 
-<p>
-  <strong>District:</strong>
-  <%= @user.district %>
-</p>
+    <p>
+      <strong>District:</strong>
+      <%= @user.district %>
+    </p>
 
-<p>
-  <strong>Phone:</strong>
-  <%= @user.phone %>
-</p>
+    <p>
+      <strong>Phone:</strong>
+      <%= @user.phone %>
+    </p>
 
-<p>
-  <strong>Email:</strong>
-  <%= @user.email %>
-</p>
+    <p>
+      <strong>Email:</strong>
+      <%= @user.email %>
+    </p>
+  </div>
+</div>
 
-<%= link_to 'Edit', edit_user_path(@user) %> |
-<%= link_to 'Back', users_path %>
+
+
+<div class="btn-group">
+  <%= link_to 'List of Scoutmasters', users_path, class: "btn btn-md btn-default" %>
+</div>
