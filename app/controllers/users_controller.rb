@@ -2,6 +2,7 @@ class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
   before_action :signed_in_user, only: [:index, :edit, :update, :destroy, :correct_user]
   before_action :correct_user, only: [:edit, :update, :destroy]
+  before_action :admin_user, only: [:destroy]
 
   def index
     @users = User.paginate(page: params[:page])
@@ -67,5 +68,9 @@ class UsersController < ApplicationController
         redirect_to root_url
         flash[:danger] = "Sorry, you aren't authorized to perform that action"
       end
+    end
+
+    def admin_user
+      redirect_to(root_url) unless current_user.admin?
     end
 end
