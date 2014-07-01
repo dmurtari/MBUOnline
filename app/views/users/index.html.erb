@@ -1,4 +1,9 @@
-<h1>Users of MBU Online</h1>
+<% provide(:title, "All Users") %>
+<div class="page-header">
+  <h1>Users of MBU Online</h1>
+</div> 
+
+<%= will_paginate %>
 
 <div class="table-responsive">
   <table class="table table-hover table-striped">
@@ -25,10 +30,12 @@
           <td><%= user.email %></td>
           <td><%= link_to 'Show', user %></td>
           <td><%= link_to 'Edit', edit_user_path(user) %></td>
-          <td><%= link_to 'Destroy', user, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+          <td><%= link_to 'Delete', user, method: :delete, data: { confirm: 'Are you sure?' } %></td>
         </tr>
       <% end %>
     </tbody>
   </table>
 </div>
 <br>
+
+<%= will_paginate %>
