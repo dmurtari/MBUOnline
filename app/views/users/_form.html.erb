@@ -3,6 +3,7 @@
     <% if @user.errors.any? %>
       <%= render 'shared/error_messages' %>
     <% end %>
+    
     <div class="form-group col-md-6">
       <%= f.label :firstname, "First Name" %>
       <%= f.text_field :firstname, class: "form-control", placeholder: "Enter your first name" %>
@@ -31,13 +32,13 @@
     </div>
 
     <div class="form-group col-md-6">
-        <%= f.label :password %>
-        <%= f.password_field :password, class: "form-control", placeholder: "Password" %>
-      </div>
-      <div class="form-group col-md-6">
-        <%= f.label :password_confirmation, "Confirmation" %>
-        <%= f.password_field :password_confirmation, class: "form-control", placeholder: "Password Confirmation" %>
-      </div>
+      <%= f.label :password %>
+      <%= f.password_field :password, class: "form-control", placeholder: "Password" %>
+    </div>
+    <div class="form-group col-md-6">
+      <%= f.label :password_confirmation, "Confirmation" %>
+      <%= f.password_field :password_confirmation, class: "form-control", placeholder: "Password Confirmation" %>
+    </div>
     
     <div class="actions">
       <%= f.submit "Save changes", class: "btn btn-med center-block" %>

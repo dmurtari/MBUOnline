@@ -1,66 +1,46 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
+  before_action :signed_in_user, only: [:index, :edit, :update, :destroy, :correct_user]
+  before_action :correct_user, only: [:edit, :update, :destroy]
 
-  # GET /users
-  # GET /users.json
   def index
     @users = User.all
   end
 
-  # GET /users/1
-  # GET /users/1.json
   def show
-    @user = User.find(params[:id])
   end
 
-  # GET /users/new
   def new
     @user = User.new
   end
 
-  # GET /users/1/edit
   def edit
   end
 
-  # POST /users
-  # POST /users.json
   def create
     @user = User.new(user_params)
-
-    respond_to do |format|
-      if @user.save
-        sign_in @user
-        format.html { redirect_to @user, notice: 'Welcome to MBU Online!' }
-        format.json { render :show, status: :created, location: @user }
-      else
-        format.html { render :new }
-        format.json { render json: @user.errors, status: :unprocessable_entity }
-      end
+    if @user.save
+      sign_in @user
+      flash[:success] = "Welcome to MBU Online!"
+      redirect_to @user
+    else
+      render :new
     end
   end
 
-  # PATCH/PUT /users/1
-  # PATCH/PUT /users/1.json
   def update
-    respond_to do |format|
-      if @user.update(user_params)
-        format.html { redirect_to @user, notice: 'User was successfully updated.' }
-        format.json { render :show, status: :ok, location: @user }
-      else
-        format.html { render :edit }
-        format.json { render json: @user.errors, status: :unprocessable_entity }
-      end
+    if @user.update(user_params)
+      flash[:success] = "Profile updated"
+      redirect_to @user
+    else
+      render :edit
     end
   end
 
-  # DELETE /users/1
-  # DELETE /users/1.json
   def destroy
     @user.destroy
-    respond_to do |format|
-      format.html { redirect_to users_url, notice: 'User was successfully destroyed.' }
-      format.json { head :no_content }
-    end
+    flash[:warning] = "#{@user.firstname} was deleted"
+    redirect_to users_url
   end
 
   private
@@ -73,5 +53,19 @@ class UsersController < ApplicationController
     def user_params
       params.require(:user).permit(:firstname, :lastname, :troop, :district, :phone, :email,
                                    :password, :password_confirmation)
+    end
+
+    def signed_in_user
+      unless signed_in?
+        redirect_to signin_url
+        flash[:danger] = "Please sign in to perform that action"
+      end
+    end
+
+    def correct_user
+      unless current_user? @user
+        redirect_to root_url
+        flash[:danger] = "Sorry, you aren't authorized to perform that action"
+      end
     end
 end
