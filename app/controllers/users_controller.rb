@@ -29,6 +29,7 @@ class UsersController < ApplicationController
 
     respond_to do |format|
       if @user.save
+        sign_in @user
         format.html { redirect_to @user, notice: 'Welcome to MBU Online!' }
         format.json { render :show, status: :created, location: @user }
       else
