@@ -31,3 +31,7 @@ en:
       scout:
         firstname: "Fist name"
         lastname: "Last Name"
+        dob: "Date of Birth"
+        emergency_relation: "Relationship with Emergency Contact"
+        emergency_name: "Emergency Contact Name"
+        emergency_phone: "Emergency COntact Phone Number"

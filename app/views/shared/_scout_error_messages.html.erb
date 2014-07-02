@@ -1,6 +1,6 @@
-<% if @user.errors.any? %>
+<% if @scout.errors.any? %>
   <p class="alert alert-danger">
-    <% @user.errors.full_messages.each do |msg| %>
+    <% @scout.errors.full_messages.each do |msg| %>
       <%= msg %></li></br>
     <% end %>
   </p>

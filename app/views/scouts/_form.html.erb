@@ -1,4 +1,7 @@
 <%= form_for(@scout) do |f| %>
+  <% if @scout.errors.any? %>
+    <%= render 'shared/scout_error_messages' %>
+  <% end %>
   <div class="panel panel-default">
     <div class="panel-heading">
       <h3 class="panel-title">Scout Information</h3>
