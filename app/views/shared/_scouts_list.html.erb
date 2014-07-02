@@ -3,8 +3,9 @@
     
     <thead>
       <tr>
-        <td>First Name</td>
-        <td>Last Name</td>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th colspan="3"></th>
       </tr>
     </thead>
     
@@ -13,6 +14,9 @@
         <tr>
           <td><%= scout.firstname %></td>
           <td><%= scout.lastname %></td>
+          <td><%= link_to 'Details', scout %></td>
+          <td><%= link_to 'Edit', edit_scout_path(scout) %></td>
+          <td><%= link_to 'Delete', scout, method: :delete, data: { confirm: 'Are you sure?'} %></td>
         </tr> 
       <% end %>  
     </tbody>

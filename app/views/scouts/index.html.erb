@@ -1,7 +1,7 @@
 <% provide(:title, "Your Scouts") %>
 
 <div class="page-header">
-  <h1>Your Scouts</h1>
+  <h1>Your Scouts <%= link_to "Add a scout", new_scout_path, class: "btn btn-lg btn-default pull-right" %></h1>
 </div>
 
 <%= render 'shared/scouts_list' %>
