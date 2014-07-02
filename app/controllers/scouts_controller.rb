@@ -28,9 +28,18 @@ class ScoutsController < ApplicationController
   end
 
   def update
+    if @scout.update(scout_params)
+      flash[:success] = "#{@scout.firstname} has been updated"
+      redirect_to current_user
+    else
+      render :edit
+    end
   end
 
   def destroy
+    @scout.destroy
+    flash[:warning] = "#{@scout.firstname} was deleted"
+    redirect_to :back
   end
 
   private

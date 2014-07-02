@@ -1,9 +1,3 @@
-<% provide(:title, "Register a Scout") %>
-
-<div class="page-header">
-  <h1>Register a New Scout</h1>
-</div>
-
 <%= form_for(@scout) do |f| %>
   <div class="form-group col-md-6">
     <%= f.label :firstname, "First Name" %>
@@ -14,6 +8,6 @@
     <%= f.text_field :lastname, class: "form-control", placeholder: "Enter scout's last name" %>
   </div>
   <div class="actions">
-    <%= f.submit "Register scout", class: "btn btn-default center-block" %>
+    <%= f.submit "Save changes", class: "btn btn-default center-block" %>
   </div>
 <% end %>
