@@ -57,13 +57,6 @@ class UsersController < ApplicationController
                                    :password, :password_confirmation)
     end
 
-    def signed_in_user
-      unless signed_in?
-        redirect_to signin_url
-        flash[:danger] = "Please sign in to perform that action"
-      end
-    end
-
     def correct_user
       unless current_user? @user
         redirect_to root_url

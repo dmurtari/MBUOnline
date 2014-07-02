@@ -28,3 +28,6 @@ en:
         lastname: "Last name"
         email: "Email address"
         phone: "Phone number"
+      scout:
+        firstname: "Fist name"
+        lastname: "Last Name"

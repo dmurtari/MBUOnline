@@ -47,6 +47,17 @@
   </div>
 </div>
 
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <% if current_user?(@user) %>
+      <h3 class="panel-title">Your scouts 
+      <%= link_to 'Add a new scout', new_scout_path, class: "btn btn-xs btn-default" %> </h3>
+    <% else %>
+      <h3 class="panel-title"><%= @user.firstname %>'s scouts</h3>
+    <% end %>
+  </div>
+  <%= render 'shared/scouts_list' %>
+</div>
 
 
 <div class="btn-group">

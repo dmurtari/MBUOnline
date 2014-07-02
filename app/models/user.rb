@@ -1,5 +1,7 @@
 class User < ActiveRecord::Base
 
+  has_many :scouts, dependent: :destroy
+
   # Actions to perform before saving to database
   before_save { email.downcase! }
   before_create :create_remember_token
