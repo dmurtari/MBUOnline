@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140702161020) do
+ActiveRecord::Schema.define(version: 20140702191227) do
 
   create_table "scouts", force: true do |t|
     t.string   "firstname"
@@ -19,6 +19,11 @@ ActiveRecord::Schema.define(version: 20140702161020) do
     t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.date     "dob"
+    t.string   "emergency_name"
+    t.string   "emergency_relation"
+    t.string   "emergency_phone"
+    t.string   "notes"
   end
 
   add_index "scouts", ["user_id"], name: "index_scouts_on_user_id"
