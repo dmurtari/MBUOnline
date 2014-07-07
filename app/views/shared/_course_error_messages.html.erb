@@ -1,0 +1,7 @@
+<% if @course.errors.any? %>
+  <p class="alert alert-danger">
+    <% @course.errors.full_messages.each do |msg| %>
+      <%= msg %></li></br>
+    <% end %>
+  </p>
+<% end %>

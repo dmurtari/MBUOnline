@@ -1,0 +1,27 @@
+<%= form_for(@course) do |f| %>
+  <% if @course.errors.any? %>
+    <%= render 'shared/course_error_messages' %>
+  <% end %>
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h3 class="panel-title">Course Information</h3>
+    </div>
+    <div class="panel-body">
+      <div class="form-group col-md-6">
+        <%= f.label :name %>
+        <%= f.text_field :name, class: "form-control", placeholder: "Enter course name" %>
+      </div>
+      <div class="form-group col-md-6">
+        <%= f.label :description %>
+        <%= f.text_field :description, class: "form-control", placeholder: "Enter description" %>
+      </div>
+        <div class="form-group col-md-6">
+        <%= f.label :room, "Room Number" %>
+        <%= f.text_field :room, class: "form-control" %>
+      </div>
+    </div>
+  </div>
+  <div class="actions">
+    <%= f.submit "Save", class: "btn btn-default center-block" %>
+  </div>
+<% end %>

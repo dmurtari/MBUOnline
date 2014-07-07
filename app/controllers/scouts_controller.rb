@@ -22,7 +22,7 @@ class ScoutsController < ApplicationController
       flash[:success] = "#{@scout.firstname} has been registered"
       redirect_to current_user
     else
-      flash[:danger] = "Saving scout failed"
+      flash[:danger] = "Saving scout failed. Please try again"
       redirect_to current_user
     end
   end
