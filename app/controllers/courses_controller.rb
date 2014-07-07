@@ -1,5 +1,6 @@
 class CoursesController < ApplicationController
   before_action :set_course, only: [:edit, :create, :update, :destroy]
+  before_action :admin_user, only: [:edit, :create, :new, :update, :destroy]
 
   def index
     @courses = Course.all
@@ -47,6 +48,13 @@ class CoursesController < ApplicationController
 
     def course_params
       params.require(:course).permit(:name, :destription, :room)
+    end
+
+    def admin_user
+      unless current_user.admin?
+        flash[:warning] = "Only site administrators can add classes"
+        redirect_to courses_url
+      end 
     end
 
 end

@@ -1,3 +1,4 @@
 class Course < ActiveRecord::Base
-  validates :name, :room, presence: true
+  validates :room, presence: true
+  validates :name, presence: true, uniqueness: { case_sensitive: false }
 end
