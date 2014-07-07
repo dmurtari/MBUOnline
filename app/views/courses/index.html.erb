@@ -1,7 +1,12 @@
 <% provide(:title, "Available Courses") %>
 
 <div class="page-header">
-  <h1>Available Courses <%= link_to "Add a course", new_course_path, class: "btn btn-lg btn-default pull-right" %></h1>
+  <h1>
+  Available Courses 
+  <% if current_user.admin? %>
+  <%= link_to "Add a course", new_course_path, class: "btn btn-lg btn-default pull-right" %>
+  <% end %>
+  </h1>
 </div>
 
 <div class="table-responsive">
@@ -22,9 +27,12 @@
           <td><%= course.description %></td>
           <td><%= course.room %></td>
           <td><%= link_to 'Details', course %></td>
+          <% if current_user.admin? %>
           <td>
+            <%= link_to 'Edit', edit_course_path(course) %>  
             <%= link_to 'Delete', course, method: :delete, data: { confirm: 'Are you sure?' } %>
           </td>
+          <% end %>
         </tr>
       <% end %>
     </tbody>

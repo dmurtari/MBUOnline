@@ -1,0 +1,24 @@
+<% provide(:title, "#{@course.name}") %>
+
+<div class="page-header">
+<h1>Details about <%= @course.name %></h1>
+</div>
+
+<div class="panel panel-default">
+  <div class="panel-body">
+    <p>
+      <strong>Course Name:</strong>
+      <%= @course.name %>
+    </p>
+
+    <p>
+      <strong>Course Description:</strong>
+      <%= @course.description %>
+    </p>
+
+    <p>
+      <strong>Room number:</strong>
+      <%= @course.room %>
+    </p>
+  </div>
+</div>

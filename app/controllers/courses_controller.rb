@@ -1,5 +1,5 @@
 class CoursesController < ApplicationController
-  before_action :set_course, only: [:edit, :create, :update, :destroy]
+  before_action :set_course, only: [:show, :edit, :update, :destroy]
   before_action :admin_user, only: [:edit, :create, :new, :update, :destroy]
 
   def index
@@ -29,6 +29,7 @@ class CoursesController < ApplicationController
   def update
     if @course.update(course_params)
       flash[:success] = "#{@course.name} updated"
+      redirect_to courses_url
     else
       render :edit
     end
@@ -47,7 +48,7 @@ class CoursesController < ApplicationController
     end
 
     def course_params
-      params.require(:course).permit(:name, :destription, :room)
+      params.require(:course).permit(:name, :description, :room)
     end
 
     def admin_user
