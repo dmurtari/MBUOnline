@@ -53,7 +53,7 @@ class CoursesController < ApplicationController
 
     def admin_user
       unless current_user.admin?
-        flash[:warning] = "Only site administrators can add classes"
+        flash[:warning] = "Sorry, you aren't authorized to perform that action"
         redirect_to courses_url
       end 
     end

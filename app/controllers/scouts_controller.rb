@@ -22,14 +22,13 @@ class ScoutsController < ApplicationController
       flash[:success] = "#{@scout.firstname} has been registered"
       redirect_to current_user
     else
-      flash[:danger] = "Saving scout failed. Please try again"
       redirect_to current_user
     end
   end
 
   def update
     if @scout.update(scout_params)
-      flash[:success] = "#{@scout.firstname} has been updated"
+      flash[:success] = "#{@scout.firstname}'s information has been updated"
       redirect_to current_user
     else
       render :edit
