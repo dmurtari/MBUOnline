@@ -43,7 +43,7 @@ class ScoutsController < ApplicationController
 
   def preferred_courses
     @courses = @scout.preferred_courses
-    redirect_to @scout
+    # redirect_to current_user
   end
 
   private
