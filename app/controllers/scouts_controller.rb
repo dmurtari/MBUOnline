@@ -1,6 +1,6 @@
 class ScoutsController < ApplicationController
   before_action :signed_in_user
-  before_action :set_scout, only: [:edit, :create, :update, :destroy]
+  before_action :set_scout, only: [:edit, :create, :update, :destroy, :preferred_courses]
 
   def index
     @scout = Scout.paginate(page: params[:page])
@@ -39,6 +39,11 @@ class ScoutsController < ApplicationController
     @scout.destroy
     flash[:warning] = "#{@scout.firstname} was deleted"
     redirect_to :back
+  end
+
+  def preferred_courses
+    @courses = @scout.preferred_courses
+    redirect_to @scout
   end
 
   private

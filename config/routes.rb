@@ -2,12 +2,12 @@ Rails.application.routes.draw do
   resources :users
   resources :scouts do
     member do
-      get :preferences
+      get :preferred_courses
     end
   end
   resources :courses
   resources :sessions, only: [:new, :create, :destroy]
-  resources :preferences, only: [:create, :destroy]
+  resources :preferred_courses, only: [:create, :destroy]
 
   root 'static_pages#home'
   get '/help' => 'static_pages#help', as: :help

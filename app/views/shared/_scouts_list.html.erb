@@ -18,6 +18,7 @@
           <td><%= scout.firstname %></td>
           <td><%= scout.lastname %></td>
           <td><%= scout.dob %></td>
+          <td><%= scout.preferred_courses %></td>
           <td>
             <div class="dropdown">
               <button class="btn btn-default btn-xs dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown">
@@ -42,6 +43,12 @@
                 </ul>
               <% end %>
             </div>
+          </td>
+          <td>
+            <% @courses.each do |course| %>
+              <p><%= course.name %></p>
+            <% end %>
+          </td>
           </td>
           <td><%= link_to 'Edit', edit_scout_path(scout) %></td>
           <td><%= link_to 'Delete', scout, method: :delete, data: { confirm: 'Are you sure?'} %></td>
