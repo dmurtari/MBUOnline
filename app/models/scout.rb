@@ -2,7 +2,7 @@ class Scout < ActiveRecord::Base
   has_many :records
   has_many :preferences
   has_many :courses, through: :records
-  has_many :preferred_courses, through: :preferences, source: :courses
+  has_many :preferred_courses, through: :preferences, source: :course
 
   belongs_to :user
   validates :user_id, :firstname, :lastname, :dob, :emergency_relation,
