@@ -1,8 +1,13 @@
 Rails.application.routes.draw do
   resources :users
-  resources :scouts
+  resources :scouts do
+    member do
+      get :preferences
+    end
+  end
   resources :courses
   resources :sessions, only: [:new, :create, :destroy]
+  resources :preferences, only: [:create, :destroy]
 
   root 'static_pages#home'
   get '/help' => 'static_pages#help', as: :help
