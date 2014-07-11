@@ -8,6 +8,15 @@ class Scout < ActiveRecord::Base
   validates :user_id, :firstname, :lastname, :dob, :emergency_relation,
             :emergency_name, :emergency_phone, presence: true
 
-  def add_course!(course)
-    records
+  def has_preference?(preferred_course)
+    preferences.find_by(course_id: preferred_course.id)
+  end
+
+  def add_preference!(preferred_course)
+    preferences.create!(course_id: preferred_course.id)
+  end
+
+  def remove_preference!(preferred_course)
+    preferences.find_by(course_id: preferred_course.id).destroy
+  end
 end
