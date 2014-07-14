@@ -50,7 +50,7 @@
     </div>
     <div class="panel-body">
       <%= f.label :preferred_courses, "Add a Preferred Course" %>
-      <%= f.select :preferred_courses, class: "form-control" %>
+      <%= collection_select(:scout, :preferred_courses, Course.all, :id, :name) %>
     </div>
   </div>
   <div class="actions">
