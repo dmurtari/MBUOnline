@@ -17,7 +17,7 @@ class PreferencesController < ApplicationController
   private
 
     def set_scout
-      @scout = current_user.scouts.first
+      @scout = current_user.scouts.find_by(id: params[:scout_id])
     end
 
 end

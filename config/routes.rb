@@ -5,11 +5,11 @@ Rails.application.routes.draw do
       get :preferred_courses
     end
   end
-  
+
+  resources :preferences
   resources :courses
   resources :sessions, only: [:new, :create, :destroy]
-  resources :preferences, only: [:create, :destroy]
-
+  
   root 'static_pages#home'
   get '/help' => 'static_pages#help', as: :help
   get '/signup' => 'users#new', as: :signup

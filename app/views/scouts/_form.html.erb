@@ -61,7 +61,7 @@
       <%= collection_select(:scout, :preferences, Course.all, :id, :name) %>
     </div>
   </div>
-
+  <%= hidden_field_tag :scout_id, @scout.id %>
   <div class="actions">
     <%= f.submit "Save", class: "btn btn-default center-block" %>
   </div>
