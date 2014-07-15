@@ -46,13 +46,19 @@
     </div>
   </div>
 
+  <div class="actions">
+    <%= f.submit "Save", class: "btn btn-default center-block" %>
+  </div>
+<% end %>
+
+<%= form_for(@scout.preferences.build(scout_id: @scout.id)) do |f| %>
   <div class="panel panel-default">
     <div class="panel-heading">
       <h3 class="panel-title">Preferred Courses</h3>
     </div>
     <div class="panel-body">
-      <%= f.label :preferred_courses, "Add a Preferred Course" %>
-      <%= collection_select(:scout, :preferred_courses, Course.all, :id, :name) %>
+      <%= f.label :course_id, "Add a Preferred Course" %>
+      <%= collection_select(:scout, :preferences, Course.all, :id, :name) %>
     </div>
   </div>
 

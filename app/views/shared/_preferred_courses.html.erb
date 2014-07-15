@@ -1,0 +1,23 @@
+<div class="table-responsive">
+  <table class="table table-hover table-striped">
+    
+    <thead>
+      <tr>
+        <th>Course Name</th>
+        <th>Description</th>
+        <th colspan="2"></th>
+      </tr>
+    </thead>
+    
+    <tbody>
+      <% current_scout.preferred_courses.each do |course| %>
+        <tr>
+          <td><%= course.name %></td>
+          <td><%= course.description %></td>
+          <td><%= link_to 'Delete', course, method: :delete, data: { confirm: 'Are you sure?'} %></td>
+        </tr> 
+      <% end %>  
+    </tbody>
+  
+  </table>
+</div>
