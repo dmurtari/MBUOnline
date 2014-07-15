@@ -10,11 +10,13 @@
     </thead>
     
     <tbody>
-      <% current_scout.preferred_courses.each do |course| %>
+      <% scout = Scout.find_by(id: params[:id]) %>
+      <%= hidden_field_tag :scout_id, scout.id %>
+      <% scout.preferred_courses.each do |course| %>
         <tr>
           <td><%= course.name %></td>
           <td><%= course.description %></td>
-          <td><%= link_to 'Delete', course, method: :delete, data: { confirm: 'Are you sure?'} %></td>
+          <td><%= link_to 'Delete', scout.preferences.find_by(course_id: course.id), method: :delete, data: { confirm: 'Are you sure?'} %></td>
         </tr> 
       <% end %>  
     </tbody>
