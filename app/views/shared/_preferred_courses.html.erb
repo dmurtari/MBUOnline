@@ -1,5 +1,5 @@
 <% scout = Scout.find_by(id: params[:id]) %>
-<% if !scout.preferred_courses.empty? %>
+<% if !scout.nil? && !scout.preferred_courses.empty? %>
   <div class="table-responsive">
     <table class="table table-hover table-striped">
       

@@ -22,7 +22,7 @@ class ScoutsController < ApplicationController
       flash[:success] = "#{@scout.firstname} has been registered"
       redirect_to current_user
     else
-      redirect_to current_user
+      render :new
     end
   end
 
