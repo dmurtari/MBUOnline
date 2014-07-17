@@ -4,10 +4,11 @@ class User < ActiveRecord::Base
 
   # Actions to perform before saving to database
   before_save { email.downcase! }
+  before_save :reformat_phone
   before_create :create_remember_token
 
   # Validations on new user creation
-  validates :firstname, :lastname, :phone, presence: true
+  validates :firstname, :lastname, presence: true
   validates :firstname, :lastname, length: {
     maximum: 40,
     too_long: "First or last name cannot be more than 40 characters"
@@ -15,6 +16,9 @@ class User < ActiveRecord::Base
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-]+(?:\.[a-z\d\-]+)*\.[a-z]+\z/i
   validates :email, presence: true, uniqueness: { case_sensitive: false }, 
             format: { with: VALID_EMAIL_REGEX }
+
+  VALID_PHONE_REGEX = /\d{3}.*\d{3}.*\d{4}/
+  validates :phone, presence: true, format: { with: VALID_PHONE_REGEX }
 
   # Password for users
   has_secure_password 
@@ -33,6 +37,11 @@ class User < ActiveRecord::Base
 
     def create_remember_token
       self.remember_token = User.digest(User.new_remember_token)
+    end
+
+    def reformat_phone
+      phone_match = /(\d{3}).*(\d{3}).*(\d{4})/.match(self.phone.to_s)
+      self.phone = "(#{phone_match[1]}) #{phone_match[2]}-#{phone_match[3]}"
     end
 
 end
