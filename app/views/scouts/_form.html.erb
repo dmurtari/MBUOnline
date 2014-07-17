@@ -47,9 +47,12 @@
   </div>
 
   <div class="actions">
-    <%= f.submit "Save", class: "btn btn-default center-block" %>
+    <%= f.submit "Save Scout Information", class: "btn btn-default center-block" %>
   </div>
 <% end %>
+
+</br>
+</br>
 
 <%= form_for(@scout.preferences.build(scout_id: @scout.id)) do |f| %>
   <%= hidden_field_tag :scout_id, @scout.id %>
@@ -60,10 +63,12 @@
     <div class="panel-body">
       <%= render 'shared/preferred_courses' %>
       <%= f.label :course_id, "Add a Preferred Course" %>
-      <%= collection_select(:scout, :preferences, Course.all, :id, :name) %>
+      <%= collection_select(:scout, :preferences, Course.all, :id, :name, 
+          { prompt: true }, { class: 'form-control' }) %>
     </div>
   </div>
+
   <div class="actions">
-    <%= f.submit "Save", class: "btn btn-default center-block" %>
+    <%= f.submit "Save Course Preferences", class: "btn btn-default center-block" %>
   </div>
 <% end %>
