@@ -33,11 +33,17 @@
 
     <div class="form-group col-md-6">
       <%= f.label :password %>
-      <%= f.password_field :password, class: "form-control", placeholder: "Password" %>
+      <%= f.password_field :password, class: "form-control", placeholder: "New Password (Optional)" %>
     </div>
     <div class="form-group col-md-6">
       <%= f.label :password_confirmation, "Confirmation" %>
       <%= f.password_field :password_confirmation, class: "form-control", placeholder: "Password Confirmation" %>
+    </div>
+
+    <div class="form-group col-md-6">
+      <%= f.label "Current Password" %>
+      <%= password_field_tag :current_password, params[:current_password], 
+          class: "form-control", placeholder: "Current password"%>
     </div>
     
     <div class="actions">

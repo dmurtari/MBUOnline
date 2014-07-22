@@ -31,10 +31,13 @@ class UsersController < ApplicationController
   end
 
   def update
-    if @user.update(user_params)
+    user = User.find_by(email: current_user.email).try(:authenticate, params[:current_password])
+    if user && @user.update(user_params)
       flash[:success] = "Profile updated"
       redirect_to @user
     else
+      flash.now[:danger] = "Incorrect Current Password" unless user
+      sign_in @user
       render :edit
     end
   end

@@ -22,8 +22,10 @@ class User < ActiveRecord::Base
 
   # Password for users
   has_secure_password 
-  validates :password, length: { minimum: 6 }
-  validates_presence_of :password, :on => :create
+  validates :password, length: { minimum: 6 }, on: [:create, :update]
+  validates :password_confirmation, presence: true, on: :update,
+            :unless => lambda{ |user| user.password.blank? }
+
 
   def User.new_remember_token
     SecureRandom.urlsafe_base64
