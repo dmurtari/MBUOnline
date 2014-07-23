@@ -10,7 +10,7 @@ class Scout < ActiveRecord::Base
   validates :user_id, :firstname, :lastname, :dob, :emergency_relation,
             :emergency_name, presence: true
 
-  validate :too_many_preferences, on: :update
+  validate :too_many_preferences, on: [:update, :create]
 
   VALID_PHONE_REGEX = /\d{3}.*\d{3}.*\d{4}/
   validates :emergency_phone, presence: true, format: { with: VALID_PHONE_REGEX }
