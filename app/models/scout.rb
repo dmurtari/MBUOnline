@@ -9,9 +9,7 @@ class Scout < ActiveRecord::Base
   belongs_to :user
   validates :user_id, :firstname, :lastname, :dob, :emergency_relation,
             :emergency_name, presence: true
-
-  validate :too_many_preferences, on: [:update, :create]
-
+            
   VALID_PHONE_REGEX = /\d{3}.*\d{3}.*\d{4}/
   validates :emergency_phone, presence: true, format: { with: VALID_PHONE_REGEX }
 
@@ -32,11 +30,5 @@ class Scout < ActiveRecord::Base
     def reformat_phone
       phone_match = /(\d{3}).*(\d{3}).*(\d{4})/.match(self.emergency_phone.to_s)
       self.emergency_phone = "(#{phone_match[1]}) #{phone_match[2]}-#{phone_match[3]}"
-    end
-
-    def too_many_preferences
-      if self.preferences.count > 2
-        errors.add(:scout, "Can't have more than 6 preferred courses")
-      end
     end
 end

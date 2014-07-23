@@ -6,6 +6,8 @@ class PreferencesController < ApplicationController
     @scout = current_user.scouts.find_by(id: params[:scout_id])
     if @scout.has_preference? @course
       flash[:danger] = "Course preference already exists"
+    elsif Preference.where(scout_id: @scout.id).count >= 6
+      flash[:danger] = "Sorry, can't add more than 6 preferences"
     else
       @scout.add_preference!(@course)
       flash[:success] = "Added preference #{@course.name}"
