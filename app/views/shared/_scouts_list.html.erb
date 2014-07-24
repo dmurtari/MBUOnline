@@ -22,12 +22,14 @@
           <td>
             <div class="dropdown">
               <button class="btn btn-default btn-xs dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown">
-                <%= scout.emergency_name %>
+                Name: <%= scout.emergency_name %>
                 <span class="caret"></span>
               </button>
               <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
-                <li role="presentation"><a role="menuitem" tabindex="-1" href="#"><%= scout.emergency_phone %></a></li>
-                <li role="presentation"><a role="menuitem" tabindex="-1" href="#"><%= scout.emergency_relation %></a></li>
+                <li role="presentation"><a role="menuitem" tabindex="-1" href="#">
+                  Phone: <%= scout.emergency_phone %></a></li>
+                <li role="presentation"><a role="menuitem" tabindex="-1" href="#">
+                  Relationship: <%= scout.emergency_relation %></a></li>
               </ul>
             </div>
           </td>
