@@ -4,7 +4,7 @@ class Scout < ActiveRecord::Base
   has_many :courses, through: :records
   has_many :preferred_courses, through: :preferences, source: :course, dependent: :destroy
 
-  before_save :reformat_phone, :calculate_age
+  before_save :reformat_phone #, :calculate_age
 
   belongs_to :user
   validates :user_id, :firstname, :lastname, :dob, :emergency_relation,
