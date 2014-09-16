@@ -3,7 +3,7 @@ class CoursesController < ApplicationController
   before_action :admin_user, only: [:edit, :create, :new, :update, :destroy]
 
   def index
-    @courses = Course.all
+    @courses = Course.order("name")
   end
 
   def show
