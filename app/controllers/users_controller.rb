@@ -60,7 +60,7 @@ class UsersController < ApplicationController
     end
 
     def correct_user
-      unless current_user? @user
+      unless current_user? @user or current_user.admin?
         redirect_to root_url
         flash[:danger] = "Sorry, you aren't authorized to perform that action"
       end
