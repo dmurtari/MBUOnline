@@ -14,7 +14,9 @@
     </thead>
     
     <tbody>
-      <% current_user.scouts.each do |scout| %>
+      <% scout_list = Scout.all if current_user.admin? %>
+      <% scout_list = current_user.scouts if !current_user.admin?%>
+      <% scout_list.each do |scout| %>
         <tr>
           <td><%= scout.firstname %></td>
           <td><%= scout.lastname %></td>
