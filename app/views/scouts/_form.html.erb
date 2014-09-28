@@ -47,6 +47,23 @@
     </div>
   </div>
 
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h3 class="panel-title">Lunch Information</h3>
+    </div>
+    <div class="panel-body">
+      <div class="form-group col-md-6">
+        <%= f.label :scout_lunch, "Dining Hall Meal Card?" %>
+        <%= f.check_box :scout_lunch, class: "form-control" %>
+      </div>
+      <div class="form-group col-md-6">
+        <%= f.label :additional_lunch, "Additional lunches for this scout (parents, etc.)" %>
+        <%= f.text_field :additional_lunch, class: "form-control", placeholder: "0" %>
+      </div>
+    </div>
+  </div>
+
+
   <div class="actions">
     <%= f.submit "Save Scout Information", class: "btn btn-default center-block" %>
   </div>

@@ -55,6 +55,7 @@ class ScoutsController < ApplicationController
     def scout_params
       params.require(:scout).permit(:firstname, :lastname, :dob, :emergency_relation,
                                     :emergency_name, :emergency_phone, :notes,
+                                    :scout_lunch, :additional_lunch,
                                     :preferred_courses)
     end
 end
