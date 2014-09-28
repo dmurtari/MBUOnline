@@ -49,7 +49,11 @@ class ScoutsController < ApplicationController
   private
 
     def set_scout
-      @scout = current_user.scouts.find_by(id: params[:id])
+      if current_user.admin?
+        @scout = Scout.find_by(id: params[:id])
+      else
+        @scout = current_user.scouts.find_by(id: params[:id])
+      end
     end
 
     def scout_params
