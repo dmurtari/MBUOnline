@@ -1,0 +1,85 @@
+<p id="notice"><%= notice %></p>
+<% debug provide(:title, "#{@scout.firstname} #{@scout.lastname}") %>
+
+<div class="page-header">
+    <h1>Details about <%= @scout.firstname %> <%= @scout.lastname %></h1>
+</div>
+
+<div class="panel panel-default">
+  <div class="panel-heading">
+      <h3 class="panel-title">Scout information 
+      <%= link_to 'Edit', edit_scout_path(@scout), class: "btn btn-xs btn-default pull-right" %> </h3>
+  </div>
+  <div class="panel-body">
+    <p>
+      <strong>First Name:</strong>
+      <%= @scout.firstname %>
+    </p>
+
+    <p>
+      <strong>Last Name:</strong>
+      <%= @scout.lastname %>
+    </p>
+
+    <p>
+      <strong>Date of Birth:</strong>
+      <%= @scout.dob %>
+    </p>
+
+    <p>
+      <strong>Age:</strong>
+      <%= @scout.age %>
+    </p>
+
+    <p>
+      <strong>Emergency Contact:</strong>
+      <%= @scout.emergency_name %>
+    </p>
+
+    <p>
+      <strong>Emergency Contact Relation:</strong>
+      <%= @scout.emergency_relation %>
+    </p>
+
+    <p>
+      <strong>Emergency Contact Phone:</strong>
+      <%= @scout.emergency_phone %>
+    </p>
+
+    <p>
+      <strong>Dining Hall Lunch:</strong>
+      <% if @scout.scout_lunch %>
+        Yes
+      <% else %>
+        No
+      <% end %>
+    </p>
+
+    <p>
+      <strong>Additional Dining Hall Lunches:</strong>
+       <% if @scout.additional_lunch == 0 %>
+        No
+      <% else %>
+        <%= @scout.additional_lunch %>
+      <% end %>
+    </p>
+
+  </div>
+</div>
+
+<div class="panel panel-default">
+  <div class="panel-heading">
+      <h3 class="panel-title">Class Requests 
+      <%= link_to 'Edit', edit_scout_path(@scout), class: "btn btn-xs btn-default pull-right" %> </h3>
+  </div>
+  <div class="panel-body">
+    <% @courses = @scout.preferred_courses %>
+    <ul>
+      <% @courses.each do |course| %>
+        <li><a href="#"><%= link_to course.name, course %></a></li>
+      <% end %>
+    </ul>
+ 
+  </div>
+
+</div>
