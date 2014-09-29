@@ -21,6 +21,10 @@
                           start_year: (Date.today.year-20), end_year: Date.today.year %>
       </div>
       <div class="form-group col-md-6">
+        <%= f.label :troop, "Troop" %>
+        <%= f.number_field :troop, class: "form-control", value: f.object.troop || f.object.user.troop %>
+      </div>
+      <div class="form-group col-md-6">
         <%= f.label :notes, "Anything else we should know?" %>
         <%= f.text_field :notes, class: "form-control", placeholder: "Allergies, dietary restrictions, etc." %>
       </div>

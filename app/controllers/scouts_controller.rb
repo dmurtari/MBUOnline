@@ -50,13 +50,17 @@ class ScoutsController < ApplicationController
   private
 
     def set_scout
-      @scout = current_user.scouts.find_by(id: params[:id])
+      if current_user.admin?
+        @scout = Scout.find_by(id: params[:id])
+      else
+        @scout = current_user.scouts.find_by(id: params[:id])
+      end
     end
 
     def scout_params
       params.require(:scout).permit(:firstname, :lastname, :dob, :emergency_relation,
                                     :emergency_name, :emergency_phone, :notes,
-                                    :scout_lunch, :additional_lunch,
-                                    :preferred_courses)
+                                    :preferred_courses, :troop, :scout_lunch, 
+                                    :additional_lunch)
     end
 end
