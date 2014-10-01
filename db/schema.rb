@@ -49,9 +49,9 @@ ActiveRecord::Schema.define(version: 20141001015658) do
     t.string   "emergency_phone"
     t.string   "notes"
     t.integer  "age"
-    t.integer  "troop"
     t.boolean  "scout_lunch"
     t.integer  "additional_lunch"
+    t.integer  "troop"
   end
 
   add_index "scouts", ["user_id"], name: "index_scouts_on_user_id"
