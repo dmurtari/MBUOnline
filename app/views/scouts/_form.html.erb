@@ -88,6 +88,8 @@
         <%= f.label :course_id, "Add a Preferred Course" %>
         <%= collection_select(:scout, :preferences, Course.all, :id, :name, 
             { prompt: true }, { class: 'form-control' }) %>
+        <%= f.label :priority, "Priority (Between 1 and 6, 1 being 1st)" %>
+        <%= f.number_field  :priority, in: 1..6, step: 1 %>
       </div>
     </div>
 
