@@ -3,13 +3,14 @@ class PreferencesController < ApplicationController
 
   def create
     @course = Course.find(params[:scout][:preferences])
+    priority = params[:preference][:priority]
     @scout = current_user.scouts.find_by(id: params[:scout_id])
     if @scout.has_preference? @course
       flash[:danger] = "Course preference already exists"
     elsif Preference.where(scout_id: @scout.id).count >= 6
       flash[:danger] = "Sorry, can't add more than 6 preferences"
     else
-      @scout.add_preference!(@course)
+      @scout.add_preference!(@course, priority)
       flash[:success] = "Added preference #{@course.name}"
     end
     redirect_to edit_scout_path(@scout)
@@ -26,5 +27,11 @@ class PreferencesController < ApplicationController
     end
     redirect_to edit_scout_path(@scout)
   end
+
+  private
+
+    def preference_params
+      params.require(:course).permit(:course_id, :scout_id, :priority)
+    end
 
 end

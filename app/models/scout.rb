@@ -17,8 +17,8 @@ class Scout < ActiveRecord::Base
     preferences.find_by(course_id: preferred_course.id)
   end
 
-  def add_preference!(preferred_course)
-    preferences.create!(course_id: preferred_course.id)
+  def add_preference!(preferred_course, priority)
+    preferences.create!(course_id: preferred_course.id, priority: priority)
   end
 
   def remove_preference!(preferred_course)
