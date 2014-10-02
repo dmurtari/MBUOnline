@@ -9,6 +9,8 @@ class PreferencesController < ApplicationController
       flash[:danger] = "Course preference already exists"
     elsif Preference.where(scout_id: @scout.id).count >= 6
       flash[:danger] = "Sorry, can't add more than 6 preferences"
+    elsif @scout.has_priority? priority
+      flash[:danger] = "Sorry, scout already has a preference with that priority"
     else
       @scout.add_preference!(@course, priority)
       flash[:success] = "Added preference #{@course.name}"
