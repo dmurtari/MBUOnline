@@ -1,0 +1,93 @@
+<div class="page-header">
+    <h1>Registration Statistics</h1>
+</div>
+
+<div class="panel panel-default">
+  <div class="panel-heading">
+      <h3 class="panel-title">Event Information</h3>
+  </div>
+  <div class="panel-body">
+    <p>
+      <strong>Year:</strong>
+    </p>
+
+    <p>
+      <strong>Semester:</strong>
+    </p>
+
+    <p>
+      <strong>Date:</strong>
+    </p>
+
+    <p>
+      <strong>Location:</strong>
+    </p>
+
+    <p>
+      <strong>Registration Price:</strong>
+    </p>
+
+    <p>
+      <strong>Organizer Names:</strong>
+    </p>
+
+    <p>
+      <strong>Organizer Email:</strong>
+    </p>
+
+    <p>
+      <strong>Organizer Phones:</strong>
+    </p>
+
+  </div>
+</div>
+
+
+
+<div class="panel panel-default">
+  <div class="panel-heading">
+      <h3 class="panel-title">Registrant Statisticss</h3>
+  </div>
+  <div class="panel-body">
+
+    <p>
+      <strong>Number of Registered Scouts:</strong>
+      <%= Scout.count %>
+    </p>
+
+    <p>
+      <strong>Number of Registered Coordinators:</strong>
+      <%= User.count %>
+    </p>
+
+    <p>
+      <strong>Number of Registered Volunteers:</strong>
+    </p>
+
+    <p>
+      <strong>Average Age of Scouts:</strong>
+      <%= Scout.average(:age) %>
+    </p>
+
+  </div>
+</div>
+
+
+<div class="panel panel-default">
+  <div class="panel-heading">
+      <h3 class="panel-title">Class Request Statistics</h3>
+  </div>
+  <div class="panel-body">
+
+    <% Preference.joins(:course).all.group(:name).count.each do |course,count| %>
+      <p> 
+        <strong><%= course %>: </strong>
+        <%= count %>
+      </p>
+    <% end %>
+
+  </div>
+</div>
+
+
+

@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'stats/index'
+
   resources :users
   resources :scouts do
     member do
@@ -15,6 +17,7 @@ Rails.application.routes.draw do
   get '/signup' => 'users#new', as: :signup
   get '/signin' => 'sessions#new', as: :signin
   get '/signout' => 'sessions#destroy', as: :signout
+  get '/stats' => 'stats#index'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
