@@ -18,7 +18,10 @@
           <tr>
             <td><%= link_to preference.course.name %></td>
             <td><%= preference.course.description %></td>
-            <td><%= preference.priority %></td>
+            <%= form_for preference do |f| %>
+              <td><%= f.label :priority %></td>
+              <td><%= f.number_field :priority, preference.priority %></td>
+            <% end %>
             <td>
               <%= link_to 'Delete', preference, method: :delete, data: 
               { confirm: 'Are you sure? You cannot undo this action'} %>
