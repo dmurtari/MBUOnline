@@ -61,6 +61,6 @@ class ScoutsController < ApplicationController
       params.require(:scout).permit(:firstname, :lastname, :dob, :emergency_relation,
                                     :emergency_name, :emergency_phone, :notes,
                                     :preferred_courses, :troop, :scout_lunch, 
-                                    :additional_lunch)
+                                    :additional_lunch, :patch, :shirt, :shirt_size)
     end
 end

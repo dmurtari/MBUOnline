@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141001015658) do
+ActiveRecord::Schema.define(version: 20141004231742) do
 
   create_table "courses", force: true do |t|
     t.string   "name"
@@ -52,6 +52,9 @@ ActiveRecord::Schema.define(version: 20141001015658) do
     t.boolean  "scout_lunch"
     t.integer  "additional_lunch"
     t.integer  "troop"
+    t.boolean  "patch"
+    t.boolean  "shirt"
+    t.string   "shirt_size"
   end
 
   add_index "scouts", ["user_id"], name: "index_scouts_on_user_id"
