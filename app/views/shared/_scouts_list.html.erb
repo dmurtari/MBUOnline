@@ -10,6 +10,7 @@
         <th>Emergency Contact</th>
         <th>Notes</th>
         <th>Preferred Courses</th>
+        <th>Cost of Attendance</th>
         <th colspan="3"></th>
       </tr>
     </thead>
@@ -41,7 +42,7 @@
             <% if !scout.notes.nil? && !scout.notes.empty? %>
               <div class="dropdown">
                 <button class="btn btn-default btn-xs dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown">
-                  <%= scout.notes[0..50] %>
+                  <%= scout.notes[0..20] %>
                   <span class="caret"></span>
                 </button>
                 <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu2">
@@ -66,6 +67,7 @@
               </div>
             <% end %>
           </td>
+          <td><%= number_to_currency scout.cost %>
           <td><%= link_to 'Details', scout %></td>
           <td><%= link_to 'Edit', edit_scout_path(scout) %></td>
           <td><%= link_to 'Delete', scout, method: :delete, data: { confirm: 'Are you sure? This action can\'t be reversed'} %></td>
