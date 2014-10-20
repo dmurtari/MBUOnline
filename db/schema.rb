@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141004231742) do
+ActiveRecord::Schema.define(version: 20141020150751) do
 
   create_table "courses", force: true do |t|
     t.string   "name"
@@ -49,12 +49,13 @@ ActiveRecord::Schema.define(version: 20141004231742) do
     t.string   "emergency_phone"
     t.string   "notes"
     t.integer  "age"
+    t.integer  "troop"
     t.boolean  "scout_lunch"
     t.integer  "additional_lunch"
-    t.integer  "troop"
     t.boolean  "patch"
     t.boolean  "shirt"
     t.string   "shirt_size"
+    t.decimal  "cost"
   end
 
   add_index "scouts", ["user_id"], name: "index_scouts_on_user_id"
@@ -72,6 +73,7 @@ ActiveRecord::Schema.define(version: 20141004231742) do
     t.string   "remember_token"
     t.boolean  "admin",           default: false
     t.string   "council"
+    t.decimal  "total_cost"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true
