@@ -35,6 +35,16 @@ class User < ActiveRecord::Base
     Digest::SHA1.hexdigest(token.to_s)
   end
 
+  def calculate_total_cost
+    total_cost = 0
+
+    self.scouts.each do |scout|
+      total_cost += scout.cost
+    end
+
+    self.total_cost = total_cost
+  end
+
   private
 
     def create_remember_token

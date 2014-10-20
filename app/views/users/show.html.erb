@@ -62,6 +62,10 @@
       <h3 class="panel-title">Your scouts 
       <%= link_to 'Add a scout', new_scout_path, class: "btn btn-xs btn-default pull-right" %> </h3>
     </div>
+    <h5 class="text-center">
+      <strong>Total cost of attendance:</strong>
+      <%= number_to_currency @user.calculate_total_cost %>
+    </h5>
     <%= render 'shared/scouts_list' %>
   </div>
 <% end %>
