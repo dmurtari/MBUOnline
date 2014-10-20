@@ -32,7 +32,7 @@ class Scout < ActiveRecord::Base
       cost += 9.50 if self.age > 12
     end
 
-    cost += (self.additional_lunch * 9.50)
+    cost += (self.additional_lunch * 9.50) if self.additional_lunch
 
     cost += 3 if self.patch
     cost += 8 if self.shirt
