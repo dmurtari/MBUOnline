@@ -98,7 +98,7 @@
         <td>
           <% if @scout.age <= 12 and @scout.scout_lunch %>
             <%= number_to_currency 7 %>
-          <% elif @scout.scout_lunch %>
+          <% elsif @scout.scout_lunch %>
             <%= number_to_currency 9.50 %>
           <% end %>
         </td>
