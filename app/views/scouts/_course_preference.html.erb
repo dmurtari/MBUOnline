@@ -1,24 +1,26 @@
-<%= form_for(@scout.preferences.build(scout_id: @scout.id)) do |f| %>
-  <%= hidden_field_tag :scout_id, @scout.id %>
-  <div class="panel panel-default">
-    <div class="panel-heading">
-      <h3 class="panel-title">Preferred Courses</h3>
-    </div>
-    <div class="panel-body">
-      <%= render 'shared/preferred_courses' %>
-      <div class="form-group col-md-6">
-        <%= f.label :course_id, "Add a Preferred Course" %>
-        <%= collection_select(:scout, :preferences, Course.all, :id, :name, 
-            { prompt: true }, { class: 'form-control' }) %>
+<% unless @scout.nil? %>
+  <%= form_for(@scout.preferences.build(scout_id: @scout.id)) do |f| %>
+    <%= hidden_field_tag :scout_id, @scout.id %>
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title">Preferred Courses</h3>
       </div>
-      <div class="form-group col-md-6">
-        <%= f.label :priority, "Priority (Between 1st and 6th)" %>
-        <%= f.number_field  :priority, class: "form-control", in: 1..6, step: 1 %>
+      <div class="panel-body">
+        <%= render 'shared/preferred_courses' %>
+        <div class="form-group col-md-6">
+          <%= f.label :course_id, "Add a Preferred Course" %>
+          <%= collection_select(:scout, :preferences, Course.all, :id, :name, 
+              { prompt: true }, { class: 'form-control' }) %>
+        </div>
+        <div class="form-group col-md-6">
+          <%= f.label :priority, "Priority (Between 1st and 6th)" %>
+          <%= f.number_field  :priority, class: "form-control", in: 1..6, step: 1 %>
+        </div>
       </div>
     </div>
-  </div>
 
-  <div class="actions">
-    <%= f.submit "Save Course Preferences", class: "btn btn-default center-block" %>
-  </div>
+    <div class="actions">
+      <%= f.submit "Save Course Preferences", class: "btn btn-default center-block" %>
+    </div>
+  <% end %>
 <% end %>

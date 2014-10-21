@@ -4,7 +4,7 @@ class Scout < ActiveRecord::Base
   has_many :courses, through: :records
   has_many :preferred_courses, through: :preferences, source: :course, dependent: :destroy
 
-  before_save :reformat_phone, :calculate_age
+  before_save :reformat_phone, :calculate_age, :calculate_costs
 
   belongs_to :user
   validates :user_id, :firstname, :lastname, :dob, :emergency_relation,
@@ -27,6 +27,21 @@ class Scout < ActiveRecord::Base
 
   def remove_preference!(preferred_course)
     preferences.find_by(course_id: preferred_course.id).destroy
+  end
+
+  def calculate_costs
+    cost = 15
+    if self.scout_lunch
+      cost += 7.00 if self.age <= 12
+      cost += 9.50 if self.age > 12
+    end
+
+    cost += (self.additional_lunch * 9.50) if self.additional_lunch
+
+    cost += 3 if self.patch
+    cost += 8 if self.shirt
+
+    self.cost = cost
   end
 
   private

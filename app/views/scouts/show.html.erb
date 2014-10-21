@@ -79,7 +79,44 @@
         <li><a href="#"><%= link_to course.name, course %></a></li>
       <% end %>
     </ul>
- 
   </div>
+</div>
 
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title">Total Cost of Attending MBU</h3>
+  </div>
+  <div class="panel-body">
+
+    <table class="table table-condensed">
+      <tr>
+        <td>Registration Fee</td>
+        <td><%= number_to_currency 15 %></td>
+      </tr>
+      <tr>
+        <td>Scout Lunch Cost</td>
+        <td>
+          <% if @scout.age <= 12 and @scout.scout_lunch %>
+            <%= number_to_currency 7 %>
+          <% elif @scout.scout_lunch %>
+            <%= number_to_currency 9.50 %>
+          <% end %>
+        </td>
+      </tr>
+      <tr>
+        <td>Additional Lunch Cost</td>
+        <td><%= number_to_currency @scout.additional_lunch * 9.50 if @scout.additional_lunch %></td>
+      </tr>
+      <tr>
+        <td>T-Shirt</td>
+        <td><%= number_to_currency 8 if @scout.shirt %></td>
+      </tr>
+      <tr>
+        <td>Patch</td>
+        <td><%= number_to_currency 3 if @scout.patch %></td>
+      </tr>
+    </table>
+
+    <h4>Total: <%= number_to_currency @scout.cost %></h4>
+  </div>
 </div>

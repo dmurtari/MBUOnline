@@ -1,6 +1,7 @@
 class ScoutsController < ApplicationController
   before_action :signed_in_user
-  before_action :set_scout, only: [:edit, :create, :update, :destroy, :preferred_courses, :show]
+  before_action :set_scout, only: [:edit, :create, :update, :destroy, 
+                                   :preferred_courses, :show, :calculate_costs]
 
   def index
     @scout = Scout.paginate(page: params[:page])
@@ -61,6 +62,7 @@ class ScoutsController < ApplicationController
       params.require(:scout).permit(:firstname, :lastname, :dob, :emergency_relation,
                                     :emergency_name, :emergency_phone, :notes,
                                     :preferred_courses, :troop, :scout_lunch, 
-                                    :additional_lunch, :patch, :shirt, :shirt_size)
+                                    :additional_lunch, :patch, :shirt, :shirt_size,
+                                    :cost)
     end
 end
