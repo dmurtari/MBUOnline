@@ -7,10 +7,11 @@ class PreferencesController < ApplicationController
     priority = params[:preference][:priority]
     @scout = current_user.scouts.find_by(id: params[:scout_id])
     if @scout.has_preference? @course
-      flash[:danger] = "Course preference already exists"
+      flash[:danger] = "Sorry, can't add preference since that course preference already exists"
     elsif Preference.where(scout_id: @scout.id).count >= 6
       flash[:danger] = "Sorry, can't add more than 6 preferences"
     else
+      priority_check(priority)
       @scout.add_preference!(@course, priority)
       flash[:success] = "Added preference #{@course.name}"
     end
@@ -33,11 +34,10 @@ class PreferencesController < ApplicationController
   end
 
   def update
-    @scout = Scout.find(Preference.find(params[:id]).scout_id)
-    @course = Course.find(Preference.find(params[:id]).course_id)
     if @preference.update(preference_params)
-      flash[:success] = "Successfully changed preference of #{@course.name} 
-                         to #{@preference.priority} for #{@scout.firstname}"
+      priority_check(@preference.priority)
+      flash[:success] = "#{@course.name} is now #{@preference.priority.ordinalize}
+                         priority for #{@scout.firstname}"
       redirect_to edit_scout_path(@scout)
     else
       render :edit
@@ -52,6 +52,15 @@ class PreferencesController < ApplicationController
 
     def set_preference
       @preference = Preference.find(params[:id])
+      @scout = Scout.find(Preference.find(params[:id]).scout_id)
+      @course = Course.find(Preference.find(params[:id]).course_id)
     end 
+
+    def priority_check(priority)
+      if @scout.has_priority? priority
+        flash[:warning] = "A #{priority.to_i.ordinalize} priority course already 
+                           exists for #{@scout.firstname}"
+      end
+    end
 
 end
