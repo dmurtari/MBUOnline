@@ -1,6 +1,6 @@
 class PreferencesController < ApplicationController
   before_action :signed_in_user
-  before_action :set_preference, only: [:edit]
+  before_action :set_preference, only: [:edit, :update]
 
   def create
     @course = Course.find(params[:scout][:preferences])
@@ -33,11 +33,21 @@ class PreferencesController < ApplicationController
 
   def edit
   end
+
+  def update
+    @scout = Scout.find(Preference.find(params[:id]).scout_id)
+    if @preference.update(preference_params)
+      flash[:success] = "Successfully changed preference"
+      redirect_to edit_scout_path(@scout)
+    else
+      render :edit
+    end
+  end
   
   private
 
     def preference_params
-      params.require(:course).permit(:course_id, :scout_id, :priority)
+      params.require(:preference).permit(:course_id, :scout_id, :priority)
     end
 
     def set_preference
