@@ -14,7 +14,7 @@
       
       <tbody>
         <%= hidden_field_tag :scout_id, scout.id %>
-        <% scout.preferences.each do |preference| %>
+        <% scout.preferences.order("priority asc").each do |preference| %>
         <!-- Problem: Preference is not getting an ID in URI -->
           <tr>
             <td><%= link_to preference.course.name %></td>

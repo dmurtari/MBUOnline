@@ -4,7 +4,7 @@ class PreferencesController < ApplicationController
 
   def create
     @course = Course.find(params[:scout][:preferences])
-    priority = params[:preference][:priority]
+    priority = preference_params[:priority]
     @scout = current_user.scouts.find_by(id: params[:scout_id])
     if @scout.has_preference? @course
       flash[:danger] = "Sorry, can't add preference since that course preference already exists"
@@ -34,10 +34,14 @@ class PreferencesController < ApplicationController
   end
 
   def update
+    priority_check(preference_params[:priority])
     if @preference.update(preference_params)
-      priority_check(@preference.priority)
-      flash[:success] = "#{@course.name} is now #{@preference.priority.ordinalize}
-                         priority for #{@scout.firstname}"
+      if @preference.priority
+        flash[:success] = "#{@course.name} is now #{@preference.priority.ordinalize}
+                           priority for #{@scout.firstname}"
+      else
+        flash[:success] = "#{@course.name} does not have a priority"
+      end
       redirect_to edit_scout_path(@scout)
     else
       render :edit
@@ -57,7 +61,7 @@ class PreferencesController < ApplicationController
     end 
 
     def priority_check(priority)
-      if @scout.has_priority? priority
+      if @scout.has_priority? priority and priority
         flash[:warning] = "A #{priority.to_i.ordinalize} priority course already 
                            exists for #{@scout.firstname}"
       end
