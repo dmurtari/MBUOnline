@@ -73,10 +73,11 @@
       <%= link_to 'Edit', edit_scout_path(@scout), class: "btn btn-xs btn-default pull-right" %> </h3>
   </div>
   <div class="panel-body">
-    <% @courses = @scout.preferred_courses %>
+    <% preferences = @scout.preferences.order("priority asc") %>
     <ul>
-      <% @courses.each do |course| %>
-        <li><a href="#"><%= link_to course.name, course %></a></li>
+      <% preferences.each do |preference| %>
+        <li><a href="#"><%= link_to preference.course.name, preference.course %>
+        <%= "(#{preference.priority.ordinalize} priority)" unless preference.priority.nil? %></a></li>
       <% end %>
     </ul>
   </div>
