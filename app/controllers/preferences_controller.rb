@@ -10,8 +10,6 @@ class PreferencesController < ApplicationController
       flash[:danger] = "Course preference already exists"
     elsif Preference.where(scout_id: @scout.id).count >= 6
       flash[:danger] = "Sorry, can't add more than 6 preferences"
-    elsif @scout.has_priority? priority
-      flash[:danger] = "Sorry, scout already has a preference with that priority"
     else
       @scout.add_preference!(@course, priority)
       flash[:success] = "Added preference #{@course.name}"
@@ -36,8 +34,10 @@ class PreferencesController < ApplicationController
 
   def update
     @scout = Scout.find(Preference.find(params[:id]).scout_id)
+    @course = Course.find(Preference.find(params[:id]).course_id)
     if @preference.update(preference_params)
-      flash[:success] = "Successfully changed preference"
+      flash[:success] = "Successfully changed preference of #{@course.name} 
+                         to #{@preference.priority} for #{@scout.firstname}"
       redirect_to edit_scout_path(@scout)
     else
       render :edit
