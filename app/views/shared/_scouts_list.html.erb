@@ -52,16 +52,22 @@
             </div>
           </td>
           <td>
-            <% @courses = scout.preferred_courses %>
-            <% if !@courses.empty? %>
+            <% preferences = scout.preferences.order("priority asc") %>
+            <% if !preferences.empty? %>
               <div class="dropdown">
                 <button class="btn btn-default btn-xs dropdown-toggle" type="button" id="dropdownMenu3" data-toggle="dropdown">
-                  <%= @courses.first.name %>
+                  <%= "#{preferences.first.course.name}" %>
                   <span class="caret"></span>
                 </button>
                 <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu3">
-                  <% @courses.each do |course| %>
-                    <li role="presentation"><a role="menuitem" tabindex="-1" href="#"><%= link_to course.name, course %></a></li>
+                  <% preferences.each_with_index do |preference, index| %>
+                    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">
+                    <%= "#{preference.priority.ordinalize} Priority:" unless preference.priority.nil? %>
+                    <%= link_to preference.course.name, preference.course %></a></li>
+                    <% unless index == preferences.size - 1 %>
+                      <li class="divider">
+                    <% end %>
+                      </li>
                   <% end %>
                 </ul>
               </div>
