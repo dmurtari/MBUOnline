@@ -39,7 +39,7 @@ class User < ActiveRecord::Base
     total_cost = 0
 
     self.scouts.each do |scout|
-      total_cost += scout.cost
+      total_cost += scout.cost unless scout.cost.nil?
     end
 
     self.total_cost = total_cost
