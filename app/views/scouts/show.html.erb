@@ -72,14 +72,7 @@
       <h3 class="panel-title">Class Requests 
       <%= link_to 'Edit', edit_scout_path(@scout), class: "btn btn-xs btn-default pull-right" %> </h3>
   </div>
-  <div class="panel-body">
-    <% @courses = @scout.preferred_courses %>
-    <ul>
-      <% @courses.each do |course| %>
-        <li><a href="#"><%= link_to course.name, course %></a></li>
-      <% end %>
-    </ul>
-  </div>
+  <%= render 'shared/preferred_courses' %>
 </div>
 
 <div class="panel panel-default">
