@@ -38,10 +38,16 @@ class User < ActiveRecord::Base
   def calculate_total_cost
     total_cost = 0
 
-    self.scouts.each do |scout|
-      total_cost += scout.cost unless scout.cost.nil?
+    if self.admin
+      Scout.all.each do |scout|
+        total_cost += scout.cost unless scout.cost.nil?
+      end
+    else
+      self.scouts.each do |scout|
+        total_cost += scout.cost unless scout.cost.nil?
+      end
     end
-
+    
     self.total_cost = total_cost
   end
 
