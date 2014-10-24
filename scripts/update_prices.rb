@@ -2,4 +2,5 @@
 
 Scout.all.each do |scout|
   scout.calculate_costs
+  scout.save
 end
