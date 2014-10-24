@@ -79,6 +79,23 @@
       <%= @adult_lunch %>
     </p>
 
+    <p>
+      <strong>Number of Shirts</strong>
+      <%= @tshirt %>
+    </p>
+
+    <p>
+      <strong>Shirt Sizes</strong></br>
+      <% @shirt_sizes.each_pair do |size, count| %>
+        <strong><%= "#{size}:" %></strong> <%= count %>
+        <% end %>
+    </p>
+
+    <p>
+      <strong>Number of Patches</strong>
+      <%= @patch %>
+    </p>
+
   </div>
 </div>
 
