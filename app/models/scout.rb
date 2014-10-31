@@ -30,6 +30,14 @@ class Scout < ActiveRecord::Base
     records.create!(course_id: course.id, period: period)
   end
 
+  def has_record?(course)
+    records.find_by(course_id: course.id)
+  end
+
+  def has_period?(period)
+    records.find_by(period: period)
+  end
+
   def remove_record!(course)
     records.find_by(course_id: course.id).destroy
   end

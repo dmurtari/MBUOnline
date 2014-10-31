@@ -6,16 +6,30 @@ class RecordsController < ApplicationController
     @course = Course.find(params[:scout][:records])
     @scout = current_user.scouts.find_by(id: params[:scout_id])
     period = record_params[:period]
-    if Record.where(scout_id: @scout.id).count > 3
+    if !period
+      flash[:warning] = "A period must be provided"
+    elsif @scout.has_period? period
+      flash[:warning] = "A #{period.to_i.ordinalize} period course for 
+                         #{@scout.firstname} already exists"
+    elsif Record.where(scout_id: @scout.id).count > 3
       flash[:danger] = "Sorry, can't add more than 3 assignments"
     else
-      @scout.add_record!(@course, period)
+      @scout.add_record!(@course, period) 
       flash[:success] = "Added assignment #{@course.name}"
     end
-    redirect_to edit_scout_path(@scout)
+    redirect_to edit_scout_path @scout 
   end
 
   def destroy
+    @course = Course.find(Record.find(params[:id]).course_id)
+    @scout = Scout.find(Record.find(params[:id]).scout_id)
+    if @scout.has_record? @course
+      @scout.remove_record! @course
+      flash[:warning] = "Course assignment for #{@course.name} was removed"
+    else
+      flash[:danger] = "Sorry, can't remove an assignment that doesn't exist"
+    end
+    redirect_to edit_scout_path @scout
   end
 
   def edit
@@ -38,5 +52,4 @@ class RecordsController < ApplicationController
       @scout = Scout.find(Record.find(params[:id]).scout_id)
       @course = Course.find(Record.find(params[:id]).course_id)
     end 
-
 end
