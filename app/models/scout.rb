@@ -27,7 +27,11 @@ class Scout < ActiveRecord::Base
   end
 
   def add_record!(course, period)
-    records.create!(course_id: course.id, period: period)
+    if course.has_room? period
+      records.create!(course_id: course.id, period: period)
+    else
+      false
+    end
   end
 
   def has_record?(course)

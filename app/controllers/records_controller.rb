@@ -7,15 +7,21 @@ class RecordsController < ApplicationController
     @scout = current_user.scouts.find_by(id: params[:scout_id])
     period = record_params[:period]
     if !period
-      flash[:warning] = "A period must be provided"
+      flash[:danger] = "A period must be provided"
     elsif @scout.has_period? period
-      flash[:warning] = "A #{period.to_i.ordinalize} period course for 
+      flash[:danger] = "A #{period.to_i.ordinalize} period course for 
                          #{@scout.firstname} already exists"
+    elsif !@course.has_room? period
+      flash[:danger] = "The #{period.to_i.ordinalize} period for #{@course.name} 
+                        is full"
     elsif Record.where(scout_id: @scout.id).count > 3
       flash[:danger] = "Sorry, can't add more than 3 assignments"
     else
-      @scout.add_record!(@course, period) 
-      flash[:success] = "Added assignment #{@course.name}"
+      if @scout.add_record!(@course, period) 
+        flash[:success] = "Added assignment #{@course.name}"
+      else
+        flash[:danger] = "Couldn't add assignment. Is the course full?"
+      end
     end
     redirect_to edit_scout_path @scout 
   end
