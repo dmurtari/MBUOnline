@@ -29,15 +29,12 @@ class StatsController < ApplicationController
     end
   end
 
-private
+  private
 
-  def correct_user
-    unless current_user.admin?
-      redirect_to root_url
-      flash[:danger] = "Sorry, you aren't authorized to perform that action"
+    def correct_user
+      unless current_user.admin?
+        redirect_to root_url
+        flash[:danger] = "Sorry, you aren't authorized to perform that action"
+      end
     end
-  end
-
-
-
 end

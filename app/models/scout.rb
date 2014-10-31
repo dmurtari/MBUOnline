@@ -26,8 +26,8 @@ class Scout < ActiveRecord::Base
     preferences.create!(course_id: preferred_course.id, priority: priority)
   end
 
-  def add_record!(course)
-    records.create!(course_id: course.id)
+  def add_record!(course, period)
+    records.create!(course_id: course.id, period: period)
   end
 
   def remove_record!(course)

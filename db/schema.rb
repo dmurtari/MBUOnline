@@ -13,13 +13,6 @@
 
 ActiveRecord::Schema.define(version: 20141030192517) do
 
-  create_table "assignments", force: true do |t|
-    t.integer  "scout_id"
-    t.integer  "course_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
   create_table "courses", force: true do |t|
     t.string   "name"
     t.string   "description"
@@ -32,7 +25,6 @@ ActiveRecord::Schema.define(version: 20141030192517) do
   create_table "preferences", force: true do |t|
     t.integer  "scout_id"
     t.integer  "course_id"
-    t.integer  "period"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "priority"

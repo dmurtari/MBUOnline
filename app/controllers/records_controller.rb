@@ -3,7 +3,7 @@ class RecordsController < ApplicationController
   before_action :set_record, only: [:edit, :update]
 
   def create
-    @course = Course.find(params[:scout][:record])
+    @course = Course.find(params[:scout][:records])
     @scout = current_user.scouts.find_by(id: params[:scout_id])
     period = record_params[:period]
     if Record.where(scout_id: @scout.id).count > 3
