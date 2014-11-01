@@ -27,6 +27,7 @@ class Scout < ActiveRecord::Base
   end
 
   def add_record!(course, period)
+    course.add_scout! period
     records.create!(course_id: course.id, period: period)
   end
 
@@ -38,7 +39,8 @@ class Scout < ActiveRecord::Base
     records.find_by(period: period)
   end
 
-  def remove_record!(course)
+  def remove_record!(course, period)
+    course.remove_scout! period
     records.find_by(course_id: course.id).destroy
   end
 

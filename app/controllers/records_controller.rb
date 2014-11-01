@@ -5,25 +5,21 @@ class RecordsController < ApplicationController
   def create
     @course = Course.find(params[:scout][:records])
     @scout = Scout.find_by(id: params[:scout_id])
-    period = record_params[:period]
+    period = record_params[:period].to_i
 
     if !period
       flash[:danger] = "A period must be provided"
     elsif @scout.has_period? period
       flash[:danger] = "A #{period.to_i.ordinalize} period course for 
                          #{@scout.firstname} already exists"
-    elsif @course.has_room? period
+    elsif !@course.has_room? period
       flash[:danger] = "The #{period.to_i.ordinalize} period for #{@course.name} 
                         is full"
     elsif Record.where(scout_id: @scout.id).count > 3
       flash[:danger] = "Sorry, can't add more than 3 assignments"
     else
-      if @scout.add_record!(@course, period)
-        @course.add_scout! period
-        flash[:success] = "Added assignment #{@course.name}"
-      else
-        flash[:danger] = "Couldn't add assignment. Is the course full?"
-      end
+      @scout.add_record!(@course, period)
+      flash[:success] = "Added assignment #{@course.name}"
     end
     redirect_to edit_scout_path @scout 
   end
@@ -34,8 +30,7 @@ class RecordsController < ApplicationController
     period = Record.find(params[:id]).period
 
     if @scout.has_record? @course
-      @scout.remove_record! @course
-      @course.remove_scout! period
+      @scout.remove_record! @course, period
       flash[:warning] = "Course assignment for #{@course.name} was removed"
     else
       flash[:danger] = "Sorry, can't remove an assignment that doesn't exist"
