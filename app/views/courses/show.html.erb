@@ -51,7 +51,8 @@
 
         <tbody>
           <% Record.all.each do |x| %>
-            <% if x.course.name == @course.name && x.period == 1%>
+            <% if x.course.name == @course.name && x.period == 1 &&
+               !x.scout.nil? %>
               <tr>
                 <td> <%= x.scout.firstname %> </td>
                 <td> <%= x.scout.lastname %> </td>
@@ -87,7 +88,8 @@
 
         <tbody>
           <% Record.all.each do |x| %>
-            <% if x.course.name == @course.name && x.period == 2 %>
+            <% if x.course.name == @course.name && x.period == 2 &&
+               !x.scout.nil? %>
               <tr>
                 <td> <%= x.scout.firstname %> </td>
                 <td> <%= x.scout.lastname %> </td>
@@ -123,7 +125,8 @@
 
         <tbody>
           <% Record.all.each do |x| %>
-            <% if x.course.name == @course.name && x.period == 3 %>
+            <% if x.course.name == @course.name && x.period == 3 &&
+               !x.scout.nil? %>
               <tr>
                 <td> <%= x.scout.firstname %> </td>
                 <td> <%= x.scout.lastname %> </td>
