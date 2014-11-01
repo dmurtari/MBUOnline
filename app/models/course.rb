@@ -13,24 +13,37 @@ class Course < ActiveRecord::Base
 
   def has_room?(period)
     case period
-    when 1
-      first_period < capacity
-    when 2
-      second_period < capacity
-    when 3
-      third_period < capacity
+      when 1
+        self.first_period < capacity
+      when 2
+        self.second_period < capacity
+      when 3
+        self.third_period < capacity
     end
   end
 
-  def add_scout(period)
+  def add_scout!(period)
     case period
-    when 1 
-      self.first_period += 1
-    when 2
-      self.second_period += 1
-    when 3
-      self.third_period += 1
+      when 1 
+        self.first_period += 1
+      when 2
+        self.second_period += 1
+      when 3
+        self.third_period += 1
     end
+    save!
+  end
+
+  def remove_scout!(period)
+    case period
+      when 1 
+        self.first_period -= 1
+      when 2
+        self.second_period -= 1
+      when 3
+        self.third_period -= 1
+    end
+    save!
   end
 
   private
