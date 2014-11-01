@@ -33,9 +33,11 @@
 </div>
 
 <% if current_user.admin? %>
-  <div class="panel panel-default">
+  <div class="panel panel-default">    
+    <div class="panel-heading">
+      <h3 class="panel-title">Period 1</h3>
+    </div>
     <div class="panel-body">
-    <h1> Period 1 </h2>
       <table class="table table-hover table-striped">
         <thead>
           <tr>
@@ -48,15 +50,17 @@
         </thead>
 
         <tbody>
-         <% Record.all.each do |x| %>
-           <% if x.course.name == @course.name && x.period == 1%>
-             <th> <%= x.scout.firstname %> </th>
-             <th> <%= x.scout.lastname %> </th>
-             <th> <%= x.scout.troop %> </th>
-             <th> <%= x.scout.age %> </th>
-             <th> <%= x.scout.notes %> </th>
-           <% end %>
-         <% end %>
+          <% Record.all.each do |x| %>
+            <% if x.course.name == @course.name && x.period == 1%>
+              <tr>
+                <td> <%= x.scout.firstname %> </td>
+                <td> <%= x.scout.lastname %> </td>
+                <td> <%= x.scout.troop %> </td>
+                <td> <%= x.scout.age %> </td>
+                <td> <%= x.scout.notes %> </td>
+              </tr>
+            <% end %>
+          <% end %>
         </tbody>
 
       </table>
@@ -65,8 +69,10 @@
   </div>
 
   <div class="panel panel-default">
+    <div class="panel-heading">
+      <h3 class="panel-title">Period 2</h3>
+    </div>
     <div class="panel-body">
-      <h1>Period 2</h1>
       <table class="table table-hover table-striped">
         <thead>
           <tr>
@@ -96,8 +102,10 @@
   </div>
 
   <div class="panel panel-default">
+    <div class="panel-heading">
+      <h3 class="panel-title">Period 3</h3>
+    </div>
     <div class="panel-body">
-      <h1>Period 3</h1>
       <table class="table table-hover table-striped">
         <thead>
           <tr>
