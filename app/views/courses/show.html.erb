@@ -31,3 +31,98 @@
 
   </div>
 </div>
+
+<% if current_user.admin? %>
+  <div class="panel panel-default">
+    <div class="panel-body">
+    <h1> Period 1 </h2>
+      <table class="table table-hover table-striped">
+        <thead>
+          <tr>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Troop</th>
+            <th>Age</th>
+            <th>Notes</th>
+          </tr>
+        </thead>
+
+        <tbody>
+         <% Record.all.each do |x| %>
+           <% if x.course.name == @course.name && x.period == 1%>
+             <th> <%= x.scout.firstname %> </th>
+             <th> <%= x.scout.lastname %> </th>
+             <th> <%= x.scout.troop %> </th>
+             <th> <%= x.scout.age %> </th>
+             <th> <%= x.scout.notes %> </th>
+           <% end %>
+         <% end %>
+        </tbody>
+
+      </table>
+
+    </div>
+  </div>
+
+  <div class="panel panel-default">
+    <div class="panel-body">
+      <h1>Period 2</h1>
+      <table class="table table-hover table-striped">
+        <thead>
+          <tr>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Troop</th>
+            <th>Age</th>
+            <th>Notes</th>
+          </tr>
+        </thead>
+
+        <tbody>
+         <% Record.all.each do |x| %>
+           <% if x.course.name == @course.name && x.period==2%>
+             <th> <%= x.scout.firstname %> </th>
+             <th> <%= x.scout.lastname %> </th>
+             <th> <%= x.scout.troop %> </th>
+             <th> <%= x.scout.age %> </th>
+             <th> <%= x.scout.notes %> </th>
+           <% end %>
+         <% end %>
+        </tbody>
+
+      </table>
+
+    </div>
+  </div>
+
+  <div class="panel panel-default">
+    <div class="panel-body">
+      <h1>Period 3</h1>
+      <table class="table table-hover table-striped">
+        <thead>
+          <tr>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Troop</th>
+            <th>Age</th>
+            <th>Notes</th>
+          </tr>
+        </thead>
+
+        <tbody>
+         <% Record.all.each do |x| %>
+           <% if x.course.name == @course.name && x.period==3%>
+             <th> <%= x.scout.firstname %> </th>
+             <th> <%= x.scout.lastname %> </th>
+             <th> <%= x.scout.troop %> </th>
+             <th> <%= x.scout.age %> </th>
+             <th> <%= x.scout.notes %> </th>
+           <% end %>
+         <% end %>
+        </tbody>
+
+      </table>
+
+    </div>
+  </div>
+<% end %>
