@@ -9,7 +9,7 @@
         <div class="form-group col-md-6">
           <%= hidden_field_tag :scout_id, @scout.id %>
           <%= f.label :course_id, "Add a Course Assignment" %>
-          <%= collection_select(:scout, :records, Course.order("name desc"), :id, :name, 
+          <%= collection_select(:scout, :records, Course.order("name asc"), :id, :name, 
               { prompt: true }, { class: 'form-control' }) %>
         </div>
         <div class="form-group col-md-6">
