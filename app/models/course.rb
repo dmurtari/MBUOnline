@@ -25,19 +25,19 @@ class Course < ActiveRecord::Base
   def add_scout(period)
     case period
     when 1 
-      first_period += 1
+      self.first_period += 1
     when 2
-      second_period += 1
+      self.second_period += 1
     when 3
-      third_period += 1
+      self.third_period += 1
     end
   end
 
   private
 
     def initialize_capacities
-      first_period ||= 0
-      second_period ||= 0
-      third_period ||= 0
+      self.first_period ||= 0
+      self.second_period ||= 0
+      self.third_period ||= 0
     end
 end
