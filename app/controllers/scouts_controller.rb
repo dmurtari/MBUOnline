@@ -53,6 +53,7 @@ class ScoutsController < ApplicationController
     def set_scout
       if current_user.admin?
         @scout = Scout.find_by(id: params[:id])
+        @admin = true
       else
         @scout = current_user.scouts.find_by(id: params[:id])
       end

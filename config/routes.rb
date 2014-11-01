@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   resources :scouts do
     member do
       get :preferred_courses
+      resources :records
     end
   end
 

@@ -1,7 +1,8 @@
 class Scout < ActiveRecord::Base
   has_many :records
-  has_many :preferences
   has_many :courses, through: :records
+
+  has_many :preferences
   has_many :preferred_courses, through: :preferences, source: :course, dependent: :destroy
 
   before_save :reformat_phone, :calculate_age, :calculate_costs
@@ -23,6 +24,24 @@ class Scout < ActiveRecord::Base
 
   def add_preference!(preferred_course, priority)
     preferences.create!(course_id: preferred_course.id, priority: priority)
+  end
+
+  def add_record!(course, period)
+    course.add_scout! period
+    records.create!(course_id: course.id, period: period)
+  end
+
+  def has_record?(course)
+    records.find_by(course_id: course.id)
+  end
+
+  def has_period?(period)
+    records.find_by(period: period)
+  end
+
+  def remove_record!(course, period)
+    course.remove_scout! period
+    records.find_by(course_id: course.id).destroy
   end
 
   def remove_preference!(preferred_course)
