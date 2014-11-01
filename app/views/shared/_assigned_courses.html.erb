@@ -20,8 +20,10 @@
             <td><%= record.course.description %></td>
             <td><%= record.period %></td>
             <td>
-              <%= link_to 'Delete', record, method: :delete, data: 
-              { confirm: 'Are you sure? You cannot undo this action'} %>
+              <% if current_user.admin? %>
+                <%= link_to 'Delete', record, method: :delete, data: 
+                { confirm: 'Are you sure? You cannot undo this action'} %>
+               <% end %>
             </td>
           </tr>
         <% end %>
