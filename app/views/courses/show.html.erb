@@ -85,15 +85,17 @@
         </thead>
 
         <tbody>
-         <% Record.all.each do |x| %>
-           <% if x.course.name == @course.name && x.period==2%>
-             <th> <%= x.scout.firstname %> </th>
-             <th> <%= x.scout.lastname %> </th>
-             <th> <%= x.scout.troop %> </th>
-             <th> <%= x.scout.age %> </th>
-             <th> <%= x.scout.notes %> </th>
-           <% end %>
-         <% end %>
+          <% Record.all.each do |x| %>
+            <% if x.course.name == @course.name && x.period == 2 %>
+              <tr>
+                <td> <%= x.scout.firstname %> </td>
+                <td> <%= x.scout.lastname %> </td>
+                <td> <%= x.scout.troop %> </td>
+                <td> <%= x.scout.age %> </td>
+                <td> <%= x.scout.notes %> </td>
+              </tr>
+            <% end %>
+          <% end %>
         </tbody>
 
       </table>
@@ -118,15 +120,17 @@
         </thead>
 
         <tbody>
-         <% Record.all.each do |x| %>
-           <% if x.course.name == @course.name && x.period==3%>
-             <th> <%= x.scout.firstname %> </th>
-             <th> <%= x.scout.lastname %> </th>
-             <th> <%= x.scout.troop %> </th>
-             <th> <%= x.scout.age %> </th>
-             <th> <%= x.scout.notes %> </th>
-           <% end %>
-         <% end %>
+          <% Record.all.each do |x| %>
+            <% if x.course.name == @course.name && x.period == 3 %>
+              <tr>
+                <td> <%= x.scout.firstname %> </td>
+                <td> <%= x.scout.lastname %> </td>
+                <td> <%= x.scout.troop %> </td>
+                <td> <%= x.scout.age %> </td>
+                <td> <%= x.scout.notes %> </td>
+              </tr>
+            <% end %>
+          <% end %>
         </tbody>
 
       </table>
