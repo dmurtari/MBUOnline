@@ -18,6 +18,9 @@
         <th>Room</th>
         <th>Price</th>
         <th>Capacity</th>
+        <th>First Period</th>
+        <th>Second Period</th>
+        <th>Third Period</th>
         <th colspan="3"></th>
       </tr>
     </thead>
@@ -30,6 +33,9 @@
           <td><%= course.room %></td>
           <td><%= number_to_currency(course.price) %></td>
           <td><%= course.capacity %></td>
+          <td><%= course.first_period %></td>
+          <td><%= course.second_period %></td>
+          <td><%= course.third_period %></td>
           <% if current_user.admin? %>
           <td>
             <%= link_to 'Edit', edit_course_path(course) %>  

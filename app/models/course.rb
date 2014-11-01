@@ -9,8 +9,35 @@ class Course < ActiveRecord::Base
   validates :name, presence: true, uniqueness: { case_sensitive: false }
   validates :capacity, presence: true
 
+  before_save :initialize_capacities
+
   def has_room?(period)
-    Course.where(period: period).count < capacity
+    case period
+    when 1
+      first_period < capacity
+    when 2
+      second_period < capacity
+    when 3
+      third_period < capacity
+    end
   end
 
+  def add_scout(period)
+    case period
+    when 1 
+      first_period += 1
+    when 2
+      second_period += 1
+    when 3
+      third_period += 1
+    end
+  end
+
+  private
+
+    def initialize_capacities
+      first_period ||= 0
+      second_period ||= 0
+      third_period ||= 0
+    end
 end

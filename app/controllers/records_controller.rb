@@ -4,7 +4,7 @@ class RecordsController < ApplicationController
 
   def create
     @course = Course.find(params[:scout][:records])
-    @scout = current_user.scouts.find_by(id: params[:scout_id])
+    @scout = Scout.find_by(id: params[:scout_id])
     period = record_params[:period]
     if !period
       flash[:danger] = "A period must be provided"
