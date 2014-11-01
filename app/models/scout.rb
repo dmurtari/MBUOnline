@@ -60,6 +60,10 @@ class Scout < ActiveRecord::Base
     cost += 3 if self.patch
     cost += 8 if self.shirt
 
+    self.records.each do |record|
+      cost += record.course.price
+    end
+
     self.cost = cost
   end
 

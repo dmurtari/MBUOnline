@@ -115,6 +115,20 @@
         <td>Patch</td>
         <td><%= number_to_currency 3 if @scout.patch %></td>
       </tr>
+      </tr>
+    </table>
+
+    <table class="table table-condensed">
+      <tr>
+        <th>Course</th>
+        <th>Course Cost</th>
+      </tr>
+      <% @scout.records.each do |record| %>
+        <tr>
+          <td><%= record.course.name %></td>
+          <td><%= number_to_currency record.course.price %></td>
+        </tr>
+      <% end %>
     </table>
 
     <h4>Total: <%= number_to_currency @scout.cost %></h4>
