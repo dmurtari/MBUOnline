@@ -61,7 +61,7 @@ class Scout < ActiveRecord::Base
     cost += 8 if self.shirt
 
     self.records.each do |record|
-      cost += record.course.price
+      cost += record.course.price unless record.course.price.nil?
     end
 
     self.cost = cost
