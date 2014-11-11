@@ -1,0 +1,19 @@
+<div class="container">
+  <%= form_for(@record) do |f| %>    
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title">Editing Priority</h3>
+      </div>
+      <div class="panel-body">
+        <div class="form-group col-md-6 col-md-offset-3">
+          <%= f.label :completion, "Completed requirements for #{@record.course.name}" %>
+          <%= f.text_field :completion, class: "form-control", placeholder: "1, 2a, 2b, 3..." %>
+        </div>
+      </div>
+    </div>
+
+    <div class="actions col-md-6 col-md-offset-3">
+      <%= f.submit "Save changes", class: "btn btn-med btn-default center-block btn-block" %>
+    </div>
+  <% end %>
+</div>
