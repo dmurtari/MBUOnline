@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   end
 
   resources :preferences
+  resources :records
   resources :courses
   resources :sessions, only: [:new, :create, :destroy]
   

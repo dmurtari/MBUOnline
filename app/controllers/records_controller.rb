@@ -42,6 +42,13 @@ class RecordsController < ApplicationController
   end
 
   def update
+    if @record.update(record_params)
+      flash[:success] = "Successfully edited completion record for 
+                         #{@scout.firstname} for #{@course.name}"
+    else
+      flash[:danger] = "Editing completion record failed"
+    end
+    redirect_to edit_scout_path @scout
   end
 
   def index
@@ -50,7 +57,7 @@ class RecordsController < ApplicationController
   private
 
     def record_params
-      params.require(:record).permit(:course_id, :scout_id, :period)
+      params.require(:record).permit(:course_id, :scout_id, :period, :completion)
     end
 
     def set_record

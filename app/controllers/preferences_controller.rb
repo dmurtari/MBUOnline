@@ -40,7 +40,7 @@ class PreferencesController < ApplicationController
         flash[:success] = "#{@course.name} is now #{@preference.priority.ordinalize}
                            priority for #{@scout.firstname}"
       else
-        flash[:success] = "#{@course.name} does not have a priority"
+        flash[:danger] = "#{@course.name} does not have a priority"
       end
       redirect_to edit_scout_path(@scout)
     else
