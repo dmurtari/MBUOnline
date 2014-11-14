@@ -71,11 +71,7 @@
       <strong>Total cost of attendance:</strong>
       <%= number_to_currency @user.calculate_total_cost %> 
       </h5>
-    <% if !current_user.admin? %>
       <%= render 'shared/scouts_list' %>
-    <% else %>
-      <%= render 'shared/all_scouts_list' %>
-    <% end %>
   </div>
 <% end %>
 
