@@ -61,7 +61,7 @@
     <div class="panel-heading">
       <h3 class="panel-title">
       <% if current_user.admin? %>
-        All Scouts
+        <%= "#{@user.firstname}'s Scouts" %>
       <% else %>
         Your scouts
       <% end %> 
@@ -71,7 +71,11 @@
       <strong>Total cost of attendance:</strong>
       <%= number_to_currency @user.calculate_total_cost %> 
       </h5>
-    <%= render 'shared/scouts_list' %>
+    <% if !current_user.admin? %>
+      <%= render 'shared/scouts_list' %>
+    <% else %>
+      <%= render 'shared/all_scouts_list' %>
+    <% end %>
   </div>
 <% end %>
 
