@@ -48,7 +48,7 @@ class RecordsController < ApplicationController
     else
       flash[:danger] = "Editing completion record failed"
     end
-    redirect_to edit_scout_path @scout
+    redirect_to @course
   end
 
   def index
