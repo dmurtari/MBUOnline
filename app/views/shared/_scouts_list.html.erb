@@ -11,6 +11,7 @@
         <th>Notes</th>
         <th>Preferred Courses</th>
         <th>Assigned Courses</th>
+        <th>Shirt Size</th>
         <th>Cost of Attendance</th>
         <th colspan="3"></th>
       </tr>
@@ -96,6 +97,7 @@
               </div>
             <% end %>
           </td>
+          <td><%= scout.shirt_size if scout.shirt %></td>
           <td><%= number_to_currency scout.cost %>
           <td><%= link_to 'Details', scout %></td>
           <td><%= link_to 'Edit Scout', edit_scout_path(scout) %></td>
