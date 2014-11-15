@@ -1,0 +1,34 @@
+<div class="table-responsive">
+  <table class="table table-hover table-striped">
+    
+    <thead>
+      <tr>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>Troop</th>
+        <th>Period 1</th>
+        <th>Period 2</th>
+        <th>Period 3</th>
+      </tr>
+    </thead>
+    
+    <tbody>
+      <% scout_list = Scout.where(user_id: params[:id]) if current_user.admin? %>
+      <% scout_list = current_user.scouts if !current_user.admin?%>
+      <% scout_list.each do |scout| %>
+      <% first_period = scout.records.where(period: 1).first.course if scout.records.where(period: 1).first %>
+      <% second_period = scout.records.where(period: 2).first.course if scout.records.where(period: 2).first %>
+      <% third_period = scout.records.where(period: 3).first.course if scout.records.where(period: 3).first %>
+        <tr>
+          <td><%= scout.firstname %></td>
+          <td><%= scout.lastname %></td>
+          <td><%= scout.troop %></td>
+          <td><%= "#{first_period.name}, #{first_period.room}" if first_period %></td>
+          <td><%= "#{second_period.name}, #{second_period.room}" if second_period %></td>
+          <td><%= "#{third_period.name}, #{third_period.room}" if third_period %></td>
+        </tr> 
+      <% end %>  
+    </tbody>
+  
+  </table>
+</div>
