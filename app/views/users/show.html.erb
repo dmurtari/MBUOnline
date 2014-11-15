@@ -77,7 +77,7 @@
     <div class="panel-heading">
       <h3 class="panel-title">
       <% if current_user.admin? %>
-        <%= "#{@user.firstname}'s Roster" %>
+        <%= "#{@user.firstname} #{@user.lastname}'s Roster" %>
       <% else %>
         Your Roster
       <% end %> 
