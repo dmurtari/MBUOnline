@@ -64,6 +64,10 @@ class User < ActiveRecord::Base
     return lunch_cards
   end
 
+  def scout_count
+    return Scout.where(user: self.id).count
+  end
+
   private
 
     def create_remember_token

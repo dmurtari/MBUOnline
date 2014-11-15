@@ -53,6 +53,7 @@
       <strong>Email:</strong>
       <%= @user.email %>
     </p>
+
   </div>
 </div>
 
@@ -70,8 +71,12 @@
     <h5 class="text-center">
       <strong>Total cost of attendance:</strong>
       <%= number_to_currency @user.calculate_total_cost %> 
-      </h5>
-      <%= render 'shared/scouts_list' %>
+    </h5>
+    <h5 class="text-center">
+      <strong>Total registered scouts:</strong>
+      <%= @user.scout_count %>      
+    </h5>
+    <%= render 'shared/scouts_list' %>
   </div>
 <% end %>
 
