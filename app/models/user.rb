@@ -52,6 +52,18 @@ class User < ActiveRecord::Base
     self.total_cost = total_cost
   end
 
+
+  def lunch_cards
+    lunch_cards = 0
+
+    self.scouts.each do |scout|
+      lunch_cards += 1 if scout.scout_lunch
+      lunch_cards += scout.additional_lunch if scout.additional_lunch
+    end
+
+    return lunch_cards
+  end
+
   private
 
     def create_remember_token
