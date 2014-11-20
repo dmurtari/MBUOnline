@@ -20,6 +20,7 @@
           <th>Cost of Attendance</th>
           <th>Total Lunch Cards</th>
           <th>Total Registerd Scouts</th>
+          <th>Patches</th>
         <% end %>
         <th colspan="3"></th>
       </tr>
@@ -39,6 +40,7 @@
             <td><%= number_to_currency user.total_cost %></td>
             <td><%= user.lunch_cards %></td>
             <td><%= user.scout_count %></td>
+            <td><%= user.patch_count %></td>
           <% end %>
           <td><%= link_to 'Details', user %></td>
           <% if current_user.admin? %>

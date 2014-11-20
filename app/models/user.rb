@@ -68,6 +68,16 @@ class User < ActiveRecord::Base
     return Scout.where(user: self.id).count
   end
 
+  def patch_count
+    patches = 0
+
+    self.scouts.each do |scout|
+      patches += 1 if scout.patch
+    end
+
+    return patches
+  end
+
   private
 
     def create_remember_token
