@@ -1,6 +1,7 @@
 class EventsController < ApplicationController
   before_action :signed_in_user
   before_action :set_event, only: [:show, :edit, :update, :destroy]
+  before_action :admin_user, only: [:edit, :create, :new, :update, :destroy]
 
   def index
     @events = Event.order("year")
@@ -27,6 +28,15 @@ class EventsController < ApplicationController
     end
   end
 
+  def update
+    if @event.update(event_params)
+      flash[:success] = "#Event updated"
+      redirect_to root_url
+    else
+      render :edit
+    end
+  end
+
   def destroy
     @event.destroy
     flash[:warning] = "Event deleted"
@@ -42,5 +52,13 @@ class EventsController < ApplicationController
     def set_event
       @event = Event.find(params[:id])
     end
+
+    def admin_user
+      unless current_user.admin?
+        flash[:warning] = "Sorry, you aren't authorized to perform that action"
+        redirect_to root_url
+      end 
+    end
+
 
 end
