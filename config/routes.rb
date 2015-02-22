@@ -12,6 +12,7 @@ Rails.application.routes.draw do
   resources :preferences
   resources :records
   resources :courses
+  resources :events
   resources :sessions, only: [:new, :create, :destroy]
   
   root 'static_pages#home'

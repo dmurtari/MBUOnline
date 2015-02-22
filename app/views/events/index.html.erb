@@ -1,0 +1,30 @@
+<% provide(:title, "All Events") %>
+<div class="page-header">
+  <h1>MBU Events</h1>
+</div>
+
+<div class="table-responsive">
+<table class="table table-hover table-striped">
+  <thead>
+    <tr>
+      <th>Year</th>
+      <th>Semester</th>
+      <th colspan="2"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @events.each do |event| %>
+      <tr>
+        <td><%= event.year %></td>
+        <td><%= event.semester %></td>
+        <td><%= link_to 'Details', event %></td>
+        <% if current_user.admin? %>
+          <td><%= link_to "Edit", edit_event_path(event) %></td>
+          <td><%= link_to "Delete", event, method: :delete, data: { confirm: 'Are you sure?'} %></td>
+        <% end %>
+      </tr>
+
+    <% end %>
+  </tbody>
+</table>
