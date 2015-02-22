@@ -1,6 +1,7 @@
 class Preference < ActiveRecord::Base
   belongs_to :scout
   belongs_to :course
+  belongs_to :event
 
   validates :scout, :course, presence: true
   validates :course_id, uniqueness: { scope: :scout_id, 

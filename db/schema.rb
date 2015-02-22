@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141104022404) do
+ActiveRecord::Schema.define(version: 20150222040636) do
 
   create_table "courses", force: true do |t|
     t.string   "name"
@@ -26,13 +26,28 @@ ActiveRecord::Schema.define(version: 20141104022404) do
     t.integer  "third_period"
   end
 
+  create_table "events", force: true do |t|
+    t.integer  "preference_id"
+    t.integer  "record_id"
+    t.string   "semester"
+    t.string   "year"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "events", ["preference_id"], name: "index_events_on_preference_id"
+  add_index "events", ["record_id"], name: "index_events_on_record_id"
+
   create_table "preferences", force: true do |t|
     t.integer  "scout_id"
     t.integer  "course_id"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "priority"
+    t.integer  "event_id"
   end
+
+  add_index "preferences", ["event_id"], name: "index_preferences_on_event_id"
 
   create_table "records", force: true do |t|
     t.integer  "scout_id"
@@ -41,7 +56,10 @@ ActiveRecord::Schema.define(version: 20141104022404) do
     t.datetime "updated_at"
     t.integer  "period"
     t.string   "completion"
+    t.integer  "event_id"
   end
+
+  add_index "records", ["event_id"], name: "index_records_on_event_id"
 
   create_table "scouts", force: true do |t|
     t.string   "firstname"
