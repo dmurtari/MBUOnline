@@ -1,6 +1,9 @@
 <% provide(:title, "All Events") %>
 <div class="page-header">
-  <h1>MBU Events</h1>
+  <h1>
+    MBU Events
+    <%= link_to "Add an Event", new_event_path, class: "btn btn-lg btn-default pull-right"  %>
+  </h1>
 </div>
 
 <div class="table-responsive">
@@ -9,6 +12,7 @@
     <tr>
       <th>Year</th>
       <th>Semester</th>
+      <th>Current?</th>
       <th colspan="2"></th>
     </tr>
   </thead>
@@ -18,6 +22,7 @@
       <tr>
         <td><%= event.year %></td>
         <td><%= event.semester %></td>
+        <td><%= event.current ? "Yes" : "No" %></td>
         <td><%= link_to 'Details', event %></td>
         <% if current_user.admin? %>
           <td><%= link_to "Edit", edit_event_path(event) %></td>
