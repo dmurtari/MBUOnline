@@ -8,17 +8,20 @@
           <th>Course Name</th>
           <th>Description</th>
           <th>Priority</th>
+          <th>Event</th>
           <th colspan="2"></th>
         </tr>
       </thead>
       
       <tbody>
+        <% event = Event.where(current: true).last %>
         <%= hidden_field_tag :scout_id, scout.id %>
-        <% scout.preferences.order("priority asc").each do |preference| %>
+        <% scout.preferences.where(event: event).order("priority asc").each do |preference| %>
           <tr>
             <td><%= link_to preference.course.name %></td>
             <td><%= preference.course.description %></td>
             <td><%= preference.priority %></td>
+            <td><%= "#{preference.event.semester} #{preference.event.year}" %></td>
             <td><%= link_to 'Edit Priority', edit_preference_path(preference) %></td>
             <td>
               <%= link_to 'Delete', preference, method: :delete, data: 
