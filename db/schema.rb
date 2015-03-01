@@ -27,17 +27,12 @@ ActiveRecord::Schema.define(version: 20150301040159) do
   end
 
   create_table "events", force: true do |t|
-    t.integer  "preference_id"
-    t.integer  "record_id"
     t.string   "semester"
     t.string   "year"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.boolean  "current",       default: false
+    t.boolean  "current",    default: false
   end
-
-  add_index "events", ["preference_id"], name: "index_events_on_preference_id"
-  add_index "events", ["record_id"], name: "index_events_on_record_id"
 
   create_table "preferences", force: true do |t|
     t.integer  "scout_id"
