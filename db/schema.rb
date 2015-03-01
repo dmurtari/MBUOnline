@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150301040159) do
+ActiveRecord::Schema.define(version: 20150301202242) do
 
   create_table "courses", force: true do |t|
     t.string   "name"
@@ -24,7 +24,10 @@ ActiveRecord::Schema.define(version: 20150301040159) do
     t.integer  "first_period"
     t.integer  "second_period"
     t.integer  "third_period"
+    t.integer  "event_id"
   end
+
+  add_index "courses", ["event_id"], name: "index_courses_on_event_id"
 
   create_table "events", force: true do |t|
     t.string   "semester"
