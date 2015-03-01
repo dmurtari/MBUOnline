@@ -27,10 +27,12 @@ class RecordsController < ApplicationController
   def destroy
     @course = Course.find(Record.find(params[:id]).course_id)
     @scout = Scout.find(Record.find(params[:id]).scout_id)
+    @event = Event.find(Record.find(params[:id]).event_id)
+
     period = Record.find(params[:id]).period
 
     if @scout.has_record? @course
-      @scout.remove_record! @course, period
+      @scout.remove_record!(@course, period, @event)
       flash[:warning] = "Course assignment for #{@course.name} was removed"
     else
       flash[:danger] = "Sorry, can't remove an assignment that doesn't exist"
@@ -64,5 +66,6 @@ class RecordsController < ApplicationController
       @record = Record.find(params[:id])
       @scout = Scout.find(Record.find(params[:id]).scout_id)
       @course = Course.find(Record.find(params[:id]).course_id)
+      @event = Event.find(Record.find(params[:id]).event_id)
     end 
 end

@@ -11,6 +11,7 @@ class Preference < ActiveRecord::Base
   # validates :priority, uniqueness: { scope: :scout_id, 
   # message: "Sorry, a preference with this priority already exists" }
 
+
   def assign_event
     event = Event.where(current: true).last
     self.event = event

@@ -6,12 +6,13 @@ class Record < ActiveRecord::Base
   before_save :assign_event
 
   validates :scout, :course, presence: true
-  validates :period, uniqueness: { scope: :scout_id,
-    message: "Sorry, assignment for this period already exists"}
+  validates_uniqueness_of :period, scope: [:scout_id, :event_id]
+  # validates :period, uniqueness: { scope: [:scout_id, :event_id],
+  #   message: "Sorry, assignment for this period already exists"}
 
   def assign_event
     event = Event.where(current: true).last
     self.event = event
   end
-  
+
 end

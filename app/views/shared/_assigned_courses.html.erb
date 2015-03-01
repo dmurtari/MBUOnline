@@ -5,6 +5,7 @@
       
       <thead>
         <tr>
+          <th>Event</th>
           <th>Course Name</th>
           <th>Description</th>
           <th>Period</th>
@@ -15,8 +16,9 @@
       
       <tbody>
         <%= hidden_field_tag :scout_id, scout.id %>
-        <% scout.records.order("period asc").each do |record| %>
+        <% scout.records.order("event_id desc, period asc").each do |record| %>
           <tr>
+            <td><%= "#{record.event.semester} #{record.event.year}" %></td>
             <td><%= link_to record.course.name %></td>
             <td><%= record.course.description %></td>
             <td><%= record.period %></td>

@@ -32,16 +32,18 @@ class Scout < ActiveRecord::Base
   end
 
   def has_record?(course)
-    records.find_by(course_id: course.id)
+    event = Event.where(current: true).last
+    records.find_by(course_id: course.id, event_id: event.id)
   end
 
   def has_period?(period)
-    records.find_by(period: period)
+    event = Event.where(current: true).last
+    records.find_by(period: period, event_id: event.id)
   end
 
-  def remove_record!(course, period)
+  def remove_record!(course, period, event)
     course.remove_scout! period
-    records.find_by(course_id: course.id).destroy
+    records.find_by(course_id: course.id, event_id: event.id).destroy
   end
 
   def remove_preference!(preferred_course)
