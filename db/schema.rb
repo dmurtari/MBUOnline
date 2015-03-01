@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150222040636) do
+ActiveRecord::Schema.define(version: 20150301040159) do
 
   create_table "courses", force: true do |t|
     t.string   "name"
@@ -33,6 +33,7 @@ ActiveRecord::Schema.define(version: 20150222040636) do
     t.string   "year"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "current",       default: false
   end
 
   add_index "events", ["preference_id"], name: "index_events_on_preference_id"

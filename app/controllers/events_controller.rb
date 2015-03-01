@@ -46,7 +46,8 @@ class EventsController < ApplicationController
   private
 
     def event_params
-      params.require(:event).permit(:preference_id, :record_id, :semester, :year)
+      params.require(:event).permit(:preference_id, :record_id, :semester, :year,
+                                    :current)
     end
 
     def set_event
