@@ -1,8 +1,9 @@
 <% provide(:title, "Available Courses") %>
+<% event = Event.where(current: true).last %>
 
 <div class="page-header">
   <h1>
-  Available Courses 
+  <%= "Available Courses: #{event.semester} #{event.year}" %>  
   <% if current_user.admin? %>
   <%= link_to "Add a course", new_course_path, class: "btn btn-lg btn-default pull-right" %>
   <% end %>
@@ -26,7 +27,7 @@
     </thead>
 
     <tbody>
-      <% @courses.each do |course| %>
+      <% @courses.where(event_id: event.id).each do |course| %>
         <tr>
           <td><%= link_to course.name, course %></td>
           <td><%= course.description %></td>

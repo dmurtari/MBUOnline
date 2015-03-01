@@ -15,10 +15,11 @@
     <tbody>
       <% scout_list = Scout.where(user_id: params[:id]) if current_user.admin? %>
       <% scout_list = current_user.scouts if !current_user.admin?%>
+      <% event = Event.where(current: true).last %>
       <% scout_list.each do |scout| %>
-      <% first_period = scout.records.where(period: 1).first.course if scout.records.where(period: 1).first %>
-      <% second_period = scout.records.where(period: 2).first.course if scout.records.where(period: 2).first %>
-      <% third_period = scout.records.where(period: 3).first.course if scout.records.where(period: 3).first %>
+      <% first_period = scout.records.where(period: 1, event: event).first.course if scout.records.where(period: 1).first %>
+      <% second_period = scout.records.where(period: 2, event: event).first.course if scout.records.where(period: 2).first %>
+      <% third_period = scout.records.where(period: 3, event: event).first.course if scout.records.where(period: 3).first %>
         <tr>
           <td><%= scout.firstname %></td>
           <td><%= scout.lastname %></td>

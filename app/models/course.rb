@@ -2,14 +2,18 @@ class Course < ActiveRecord::Base
   has_many :records
   has_many :scouts, through: :records
 
+  belongs_to :event
+
   has_many :preferences, dependent: :destroy
   has_many :requesting_scouts, through: :preferences, source: :scout
   
   validates :room, presence: true
   validates :name, presence: true, uniqueness: { case_sensitive: false }
+  validates_uniqueness_of :name, scope: :event_id
   validates :capacity, presence: true
 
   before_save :initialize_capacities
+  before_save :assign_event
 
   def has_room?(period)
     case period
@@ -53,4 +57,10 @@ class Course < ActiveRecord::Base
       self.second_period ||= 0
       self.third_period ||= 0
     end
+
+    def assign_event
+      event = Event.where(current: true).last
+      self.event = event
+    end
+
 end
