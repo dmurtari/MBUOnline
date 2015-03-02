@@ -18,6 +18,7 @@
     
     <tbody>
       <% scout_list = Scout.all if current_user.admin? %>
+      <% event = Event.where(current: true).last %>
       <% scout_list.each do |scout| %>
         <tr>
           <td><%= scout.firstname %></td>
@@ -52,7 +53,8 @@
             </div>
           </td>
           <td>
-            <% preferences = scout.preferences.order("priority asc") %>
+
+            <% preferences = scout.preferences.where(event: event).order("priority asc") %>
             <% if !preferences.empty? %>
               <div class="dropdown">
                 <button class="btn btn-default btn-xs dropdown-toggle" type="button" id="dropdownMenu3" data-toggle="dropdown">
@@ -74,7 +76,7 @@
             <% end %>
           </td>
           <td>
-            <% records = scout.records.order("period asc") %>
+            <% records = scout.records.where(event: event).order("period asc") %>
             <% if !records.empty? %>
               <div class="dropdown">
                 <button class="btn btn-default btn-xs dropdown-toggle" type="button" id="dropdownMenu3" data-toggle="dropdown">
