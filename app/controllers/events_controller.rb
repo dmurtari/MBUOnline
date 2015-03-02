@@ -33,6 +33,7 @@ class EventsController < ApplicationController
       flash[:success] = "Event updated"
       redirect_to events_url
     else
+      flash[:danger] = "Update failed"
       render :edit
     end
   end
