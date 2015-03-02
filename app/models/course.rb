@@ -8,7 +8,6 @@ class Course < ActiveRecord::Base
   has_many :requesting_scouts, through: :preferences, source: :scout
   
   validates :room, presence: true
-  validates :name, presence: true, uniqueness: { case_sensitive: false }
   validates_uniqueness_of :name, scope: :event_id
   validates :capacity, presence: true
 
