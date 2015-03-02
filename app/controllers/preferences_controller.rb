@@ -5,10 +5,12 @@ class PreferencesController < ApplicationController
   def create
     @course = Course.find(params[:scout][:preferences])
     priority = preference_params[:priority]
+    event = Event.where(current: true).last
     @scout = Scout.find_by(id: params[:scout_id])
+
     if @scout.has_preference? @course
       flash[:danger] = "Sorry, can't add preference since that course preference already exists"
-    elsif Preference.where(scout_id: @scout.id).count >= 6
+    elsif Preference.where(event: event, scout_id: @scout.id).count >= 6
       flash[:danger] = "Sorry, can't add more than 6 preferences"
     else
       priority_check(priority)

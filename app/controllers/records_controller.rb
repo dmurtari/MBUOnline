@@ -6,6 +6,7 @@ class RecordsController < ApplicationController
     @course = Course.find(params[:scout][:records])
     @scout = Scout.find_by(id: params[:scout_id])
     period = record_params[:period].to_i
+    event = Event.where(current: true).last
 
     if !period
       flash[:danger] = "A period must be provided"
@@ -15,7 +16,7 @@ class RecordsController < ApplicationController
     elsif !@course.has_room? period
       flash[:danger] = "The #{period.to_i.ordinalize} period for #{@course.name} 
                         is full"
-    elsif Record.where(scout_id: @scout.id).count > 3
+    elsif Record.where(event: event, scout_id: @scout.id).count > 3
       flash[:danger] = "Sorry, can't add more than 3 assignments"
     else
       @scout.add_record!(@course, period)

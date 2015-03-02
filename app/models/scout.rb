@@ -15,11 +15,13 @@ class Scout < ActiveRecord::Base
   validates :emergency_phone, presence: true, format: { with: VALID_PHONE_REGEX }
 
   def has_preference?(preferred_course)
-    preferences.find_by(course_id: preferred_course.id)
+    event = Event.where(current: true).last
+    preferences.find_by(course_id: preferred_course.id, event_id: event.id)
   end
 
   def has_priority?(priority)
-    preferences.find_by(priority: priority)
+    event = Event.where(current: true).last
+    preferences.find_by(priority: priority, event_id: event.id)
   end
 
   def add_preference!(preferred_course, priority)
