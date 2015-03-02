@@ -55,14 +55,12 @@ class Scout < ActiveRecord::Base
   def calculate_costs
     cost = 15
     if self.scout_lunch
-      cost += 7.00 if self.age <= 12
-      cost += 9.50 if self.age > 12
+      cost += 10
     end
 
-    cost += (self.additional_lunch * 9.50) if self.additional_lunch
+    cost += (self.additional_lunch * 10) if self.additional_lunch
 
-    cost += 3 if self.patch
-    cost += 8 if self.shirt
+    cost += 10 if self.shirt
 
     self.records.each do |record|
       cost += record.course.price unless record.course.price.nil?
