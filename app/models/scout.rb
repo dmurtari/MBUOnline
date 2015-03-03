@@ -56,6 +56,7 @@ class Scout < ActiveRecord::Base
     event = Event.where(current: true).last
 
     cost = 15
+    
     if self.scout_lunch
       cost += 10
     end

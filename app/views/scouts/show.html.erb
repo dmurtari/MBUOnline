@@ -106,20 +106,16 @@
       <tr>
         <td>Scout Lunch Cost</td>
         <td>
-          <% if @scout.age <= 12 and @scout.scout_lunch %>
-            <%= number_to_currency 7 %>
-          <% elsif @scout.scout_lunch %>
-            <%= number_to_currency 9.50 %>
-          <% end %>
+          <%= number_to_currency 10 %>
         </td>
       </tr>
       <tr>
         <td>Additional Lunch Cost</td>
-        <td><%= number_to_currency @scout.additional_lunch * 9.50 if @scout.additional_lunch %></td>
+        <td><%= number_to_currency @scout.additional_lunch * 10 if @scout.additional_lunch %></td>
       </tr>
       <tr>
         <td>T-Shirt</td>
-        <td><%= number_to_currency 8 if @scout.shirt %></td>
+        <td><%= number_to_currency 10 if @scout.shirt %></td>
       </tr>
       <tr>
         <td>Patch</td>
@@ -133,7 +129,8 @@
         <th>Course</th>
         <th>Course Cost</th>
       </tr>
-      <% @scout.records.each do |record| %>
+      <% event = Event.where(current: true).last %>
+      <% @scout.records.where(event:event).each do |record| %>
         <tr>
           <td><%= record.course.name %></td>
           <td><%= number_to_currency record.course.price %></td>
