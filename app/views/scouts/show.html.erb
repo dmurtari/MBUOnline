@@ -106,7 +106,7 @@
       <tr>
         <td>Scout Lunch Cost</td>
         <td>
-          <%= number_to_currency 10 %>
+          <%= number_to_currency 10 if @scout.scout_lunch%>
         </td>
       </tr>
       <tr>
