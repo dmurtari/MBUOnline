@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150301202242) do
+ActiveRecord::Schema.define(version: 20150302224721) do
 
   create_table "courses", force: true do |t|
     t.string   "name"
@@ -37,6 +37,10 @@ ActiveRecord::Schema.define(version: 20150301202242) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.boolean  "current",       default: false
+    t.decimal  "event_price"
+    t.decimal  "lunch_price"
+    t.decimal  "tshirt_price"
+    t.decimal  "patch_price"
   end
 
   add_index "events", ["preference_id"], name: "index_events_on_preference_id"
