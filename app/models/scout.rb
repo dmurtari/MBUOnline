@@ -53,6 +53,8 @@ class Scout < ActiveRecord::Base
   end
 
   def calculate_costs
+    event = Event.where(current: true).last
+
     cost = 15
     if self.scout_lunch
       cost += 10
@@ -62,7 +64,7 @@ class Scout < ActiveRecord::Base
 
     cost += 10 if self.shirt
 
-    self.records.each do |record|
+    self.records.where(event: event).each do |record|
       cost += record.course.price unless record.course.price.nil?
     end
 
