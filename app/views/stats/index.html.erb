@@ -7,12 +7,13 @@
       <h3 class="panel-title">Event Information</h3>
   </div>
   <div class="panel-body">
+    <% event = Event.where(current: true).last %>
     <p>
-      <strong>Year:</strong>
+      <strong>Year: <%= event.year %></strong>
     </p>
 
     <p>
-      <strong>Semester:</strong>
+      <strong>Semester: <%= event.semester %></strong>
     </p>
 
     <p>
@@ -106,7 +107,7 @@
   </div>
   <div class="panel-body">
 
-    <% Preference.joins(:course).all.group(:name).count.each do |course,count| %>
+    <% Preference.where(event: event).joins(:course).all.group(:name).count.each do |course,count| %>
       <p> 
         <strong><%= course %>: </strong>
         <%= count %>
