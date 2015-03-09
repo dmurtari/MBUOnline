@@ -52,24 +52,32 @@ class Scout < ActiveRecord::Base
     preferences.find_by(course_id: preferred_course.id).destroy
   end
 
+  def preferences_for?(event)
+    preferences.where(event: event).any?
+  end
+
+  def records_for?(event)
+    records.where(event: event).any?
+  end
+
   def calculate_costs
     event = Event.where(current: true).last
-
-    cost = 15
     
-    if self.scout_lunch
-      cost += 10
+    if !preferences_for?(event) 
+      self.cost = 0
+    else
+      cost = 15
+      
+      cost += 10 if self.scout_lunch
+      cost += (self.additional_lunch * 10) if self.additional_lunch
+      cost += 10 if self.shirt
+
+      self.records.where(event: event).each do |record|
+        cost += record.course.price unless record.course.price.nil?
+      end
+
+      self.cost = cost
     end
-
-    cost += (self.additional_lunch * 10) if self.additional_lunch
-
-    cost += 10 if self.shirt
-
-    self.records.where(event: event).each do |record|
-      cost += record.course.price unless record.course.price.nil?
-    end
-
-    self.cost = cost
   end
 
   private
