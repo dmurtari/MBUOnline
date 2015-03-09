@@ -63,7 +63,7 @@ class Scout < ActiveRecord::Base
   def calculate_costs
     event = Event.where(current: true).last
     
-    if !preferences_for?(event) 
+    if !preferences_for?(event) && !records_for?(event) 
       self.cost = 0
     else
       cost = 15

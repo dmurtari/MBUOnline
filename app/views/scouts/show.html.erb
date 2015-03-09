@@ -97,48 +97,54 @@
     <h3 class="panel-title">Total Cost of Attending MBU</h3>
   </div>
   <div class="panel-body">
+    <% event = Event.where(current: true).last %>
 
-    <table class="table table-condensed">
-      <tr>
-        <td>Registration Fee</td>
-        <td><%= number_to_currency 15 %></td>
-      </tr>
-      <tr>
-        <td>Scout Lunch Cost</td>
-        <td>
-          <%= number_to_currency 10 if @scout.scout_lunch%>
-        </td>
-      </tr>
-      <tr>
-        <td>Additional Lunch Cost</td>
-        <td><%= number_to_currency @scout.additional_lunch * 10 if @scout.additional_lunch %></td>
-      </tr>
-      <tr>
-        <td>T-Shirt</td>
-        <td><%= number_to_currency 10 if @scout.shirt %></td>
-      </tr>
-      <tr>
-        <td>Patch</td>
-        <td><%= number_to_currency 3 if @scout.patch %></td>
-      </tr>
-      </tr>
-    </table>
-
-    <table class="table table-condensed">
-      <tr>
-        <th>Course</th>
-        <th>Course Cost</th>
-      </tr>
-      <% event = Event.where(current: true).last %>
-      <% @scout.records.where(event:event).each do |record| %>
+    <% if @scout.preferences_for?(event) || @scout.records_for?(event) %>
+      <table class="table table-condensed">
         <tr>
-          <td><%= record.course.name %></td>
-          <td><%= number_to_currency record.course.price %></td>
+          <td>Registration Fee</td>
+          <td><%= number_to_currency 15 %></td>
         </tr>
-      <% end %>
-    </table>
+        <tr>
+          <td>Scout Lunch Cost</td>
+          <td>
+            <%= number_to_currency 10 if @scout.scout_lunch%>
+          </td>
+        </tr>
+        <tr>
+          <td>Additional Lunch Cost</td>
+          <td><%= number_to_currency @scout.additional_lunch * 10 if @scout.additional_lunch %></td>
+        </tr>
+        <tr>
+          <td>T-Shirt</td>
+          <td><%= number_to_currency 10 if @scout.shirt %></td>
+        </tr>
+        <tr>
+          <td>Patch</td>
+          <td><%= number_to_currency 3 if @scout.patch %></td>
+        </tr>
+        </tr>
+      </table>
+      <% if @scout.records_for?(event) %>
+        <table class="table table-condensed">
+          <tr>
+            <th>Course</th>
+            <th>Course Cost</th>
+          </tr>
+          <% event = Event.where(current: true).last %>
+          <% @scout.records.where(event:event).each do |record| %>
+            <tr>
+              <td><%= record.course.name %></td>
+              <td><%= number_to_currency record.course.price %></td>
+            </tr>
+          <% end %>
+        </table>
+       <% end %> 
 
-    <h4>Total: <%= number_to_currency @scout.cost %></h4>
+      <h4>Total: <%= number_to_currency @scout.cost %></h4>
+    <% else %>
+      <strong><%= "Scout does not have any class preferences and/or does not have any records for the current event (#{event.semester} #{event.year})" %></strong>
+    <% end %>
   </div>
 </div>
 
