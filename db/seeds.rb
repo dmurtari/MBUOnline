@@ -5,3 +5,25 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
+
+case Rails.env
+when 'development' || 'test'
+  User.create!(firstname: "MBU",
+               lastname: "Admin",
+               email: "mbu@apo-gammatheta.org",
+               password: "letmein",
+               password_confirmation: "letmein",
+               phone: "123-456-7890",
+               admin: true)
+
+  10.times do |course|
+    name = Faker::App.name
+    price = 15
+    room = "TBA"
+
+    Course.create!(name: name,
+                   price: price,
+                   room: room)
+  end
+    
+end
