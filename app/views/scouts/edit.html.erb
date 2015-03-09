@@ -5,3 +5,11 @@
 </div>
 
 <%= render 'form' %>
+<%= render 'course_preference' %>
+<% if @admin %>
+  <%= render 'create_records' %>
+<% end %>
+
+<div class="btn-group">
+  <%= link_to "Details about #{@scout.firstname}", @scout, class: "btn btn-md btn-default" %>
+</div>

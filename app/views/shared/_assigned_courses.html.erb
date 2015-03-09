@@ -1,0 +1,43 @@
+<% scout = Scout.find_by(id: params[:id]) %>
+<% if !scout.nil? && !scout.records.empty? %>
+  <div class="table-responsive">
+    <table class="table table-hover table-striped">
+      
+      <thead>
+        <tr>
+          <th>Event</th>
+          <th>Course Name</th>
+          <th>Description</th>
+          <th>Period</th>
+          <th>Completed Requirements</th>
+          <th colspan="2"></th>
+        </tr>
+      </thead>
+      
+      <tbody>
+        <%= hidden_field_tag :scout_id, scout.id %>
+        <% scout.records.order("event_id desc, period asc").each do |record| %>
+          <tr>
+            <td><%= "#{record.event.semester} #{record.event.year}" %></td>
+            <td><%= link_to record.course.name %></td>
+            <td><%= record.course.description %></td>
+            <td><%= record.period %></td>
+            <td><%= record.completion %></td>
+            <td>
+              <% if current_user.admin? %>
+                <%= link_to 'Delete', record, method: :delete, data: 
+                { confirm: 'Are you sure? You cannot undo this action'} %>
+               <% end %>
+            </td>
+            <td>
+              <% if current_user.admin? %>
+                <%= link_to 'Edit Completion Record', edit_record_path(record) %>
+              <% end %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    
+    </table>
+  </div>
+<% end %>

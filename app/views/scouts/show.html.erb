@@ -8,7 +8,7 @@
 <div class="panel panel-default">
   <div class="panel-heading">
       <h3 class="panel-title">Scout information 
-      <%= link_to 'Edit', edit_scout_path(@scout), class: "btn btn-xs btn-default pull-right" %> </h3>
+      <%= link_to 'Edit Scout Information', edit_scout_path(@scout), class: "btn btn-xs btn-default pull-right" %> </h3>
   </div>
   <div class="panel-body">
     <p>
@@ -19,6 +19,16 @@
     <p>
       <strong>Last Name:</strong>
       <%= @scout.lastname %>
+    </p>
+
+    <p>
+      <strong>Coordinator Name:</strong>
+      <%= "#{@scout.user.firstname} #{@scout.user.lastname}" %>
+    </p>
+
+    <p>
+      <strong>Coordinator Email:</strong>
+      <%= @scout.user.email %>
     </p>
 
     <p>
@@ -70,16 +80,16 @@
 <div class="panel panel-default">
   <div class="panel-heading">
       <h3 class="panel-title">Class Requests 
-      <%= link_to 'Edit', edit_scout_path(@scout), class: "btn btn-xs btn-default pull-right" %> </h3>
+      <%= link_to 'Edit Scout Information', edit_scout_path(@scout), class: "btn btn-xs btn-default pull-right" %> </h3>
   </div>
-  <div class="panel-body">
-    <% @courses = @scout.preferred_courses %>
-    <ul>
-      <% @courses.each do |course| %>
-        <li><a href="#"><%= link_to course.name, course %></a></li>
-      <% end %>
-    </ul>
+  <%= render 'shared/preferred_courses' %>
+</div>
+
+<div class="panel panel-default">
+  <div class="panel-heading">
+      <h3 class="panel-title">Class Assignments</h3>
   </div>
+  <%= render 'shared/assigned_courses' %>
 </div>
 
 <div class="panel panel-default">
@@ -96,27 +106,42 @@
       <tr>
         <td>Scout Lunch Cost</td>
         <td>
-          <% if @scout.age <= 12 and @scout.scout_lunch %>
-            <%= number_to_currency 7 %>
-          <% elif @scout.scout_lunch %>
-            <%= number_to_currency 9.50 %>
-          <% end %>
+          <%= number_to_currency 10 if @scout.scout_lunch%>
         </td>
       </tr>
       <tr>
         <td>Additional Lunch Cost</td>
-        <td><%= number_to_currency @scout.additional_lunch * 9.50 if @scout.additional_lunch %></td>
+        <td><%= number_to_currency @scout.additional_lunch * 10 if @scout.additional_lunch %></td>
       </tr>
       <tr>
         <td>T-Shirt</td>
-        <td><%= number_to_currency 8 if @scout.shirt %></td>
+        <td><%= number_to_currency 10 if @scout.shirt %></td>
       </tr>
       <tr>
         <td>Patch</td>
         <td><%= number_to_currency 3 if @scout.patch %></td>
       </tr>
+      </tr>
+    </table>
+
+    <table class="table table-condensed">
+      <tr>
+        <th>Course</th>
+        <th>Course Cost</th>
+      </tr>
+      <% event = Event.where(current: true).last %>
+      <% @scout.records.where(event:event).each do |record| %>
+        <tr>
+          <td><%= record.course.name %></td>
+          <td><%= number_to_currency record.course.price %></td>
+        </tr>
+      <% end %>
     </table>
 
     <h4>Total: <%= number_to_currency @scout.cost %></h4>
   </div>
+</div>
+
+<div class="btn-group">
+  <%= link_to 'Your Profile', @scout.user, class: "btn btn-md btn-default" %>
 </div>

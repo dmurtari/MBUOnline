@@ -1,14 +1,14 @@
 class ScoutsController < ApplicationController
   before_action :signed_in_user
   before_action :set_scout, only: [:edit, :create, :update, :destroy, 
-                                   :preferred_courses, :show, :calculate_costs]
+                                   :preferred_courses, :show]
 
   def index
     @scout = Scout.paginate(page: params[:page])
   end
 
   def show
-
+    # @scout.calculate_costs
   end
 
   def new
@@ -53,6 +53,7 @@ class ScoutsController < ApplicationController
     def set_scout
       if current_user.admin?
         @scout = Scout.find_by(id: params[:id])
+        @admin = true
       else
         @scout = current_user.scouts.find_by(id: params[:id])
       end

@@ -7,19 +7,28 @@
         <tr>
           <th>Course Name</th>
           <th>Description</th>
+          <th>Priority</th>
+          <th>Event</th>
           <th colspan="2"></th>
         </tr>
       </thead>
       
       <tbody>
+        <% event = Event.where(current: true).last %>
         <%= hidden_field_tag :scout_id, scout.id %>
-        <% scout.preferred_courses.each do |course| %>
+        <% scout.preferences.where(event: event).order("priority asc").each do |preference| %>
           <tr>
-            <td><%= link_to course.name, course %></td>
-            <td><%= course.description %></td>
-            <td><%= link_to 'Delete', scout.preferences.find_by(course_id: course.id), method: :delete, data: { confirm: 'Are you sure? You cannot undo this action'} %></td>
-          </tr> 
-        <% end %>  
+            <td><%= link_to preference.course.name %></td>
+            <td><%= preference.course.description %></td>
+            <td><%= preference.priority %></td>
+            <td><%= "#{preference.event.semester} #{preference.event.year}" %></td>
+            <td><%= link_to 'Edit Priority', edit_preference_path(preference) %></td>
+            <td>
+              <%= link_to 'Delete', preference, method: :delete, data: 
+              { confirm: 'Are you sure? You cannot undo this action'} %>
+            </td>
+          </tr>
+        <% end %>
       </tbody>
     
     </table>

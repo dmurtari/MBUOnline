@@ -1,7 +1,8 @@
 class Scout < ActiveRecord::Base
   has_many :records
-  has_many :preferences
   has_many :courses, through: :records
+
+  has_many :preferences
   has_many :preferred_courses, through: :preferences, source: :course, dependent: :destroy
 
   before_save :reformat_phone, :calculate_age, :calculate_costs
@@ -14,11 +15,37 @@ class Scout < ActiveRecord::Base
   validates :emergency_phone, presence: true, format: { with: VALID_PHONE_REGEX }
 
   def has_preference?(preferred_course)
-    preferences.find_by(course_id: preferred_course.id)
+    event = Event.where(current: true).last
+    preferences.find_by(course_id: preferred_course.id, event_id: event.id)
   end
 
-  def add_preference!(preferred_course)
-    preferences.create!(course_id: preferred_course.id)
+  def has_priority?(priority)
+    event = Event.where(current: true).last
+    preferences.find_by(priority: priority, event_id: event.id)
+  end
+
+  def add_preference!(preferred_course, priority)
+    preferences.create!(course_id: preferred_course.id, priority: priority)
+  end
+
+  def add_record!(course, period)
+    course.add_scout! period
+    records.create!(course_id: course.id, period: period)
+  end
+
+  def has_record?(course)
+    event = Event.where(current: true).last
+    records.find_by(course_id: course.id, event_id: event.id)
+  end
+
+  def has_period?(period)
+    event = Event.where(current: true).last
+    records.find_by(period: period, event_id: event.id)
+  end
+
+  def remove_record!(course, period, event)
+    course.remove_scout! period
+    records.find_by(course_id: course.id, event_id: event.id).destroy
   end
 
   def remove_preference!(preferred_course)
@@ -26,16 +53,21 @@ class Scout < ActiveRecord::Base
   end
 
   def calculate_costs
+    event = Event.where(current: true).last
+
     cost = 15
+    
     if self.scout_lunch
-      cost += 7.00 if self.age <= 12
-      cost += 9.50 if self.age > 12
+      cost += 10
     end
 
-    cost += (self.additional_lunch * 9.50) if self.additional_lunch
+    cost += (self.additional_lunch * 10) if self.additional_lunch
 
-    cost += 3 if self.patch
-    cost += 8 if self.shirt
+    cost += 10 if self.shirt
+
+    self.records.where(event: event).each do |record|
+      cost += record.course.price unless record.course.price.nil?
+    end
 
     self.cost = cost
   end

@@ -24,6 +24,52 @@
       <strong>Price:</strong>
       <%= @course.price %>
     </p>
+    <p>
+      <strong>Capacity:</strong>
+      <%= @course.capacity %>
+    </p>
 
   </div>
 </div>
+
+<% if current_user.admin? %>
+  <% periods = [1, 2, 3] %>
+  <% periods.each do |period| %>
+    <div class="panel panel-default">    
+      <div class="panel-heading">
+        <h3 class="panel-title"><%= "Period #{period}" %></h3>
+      </div>
+      <div class="panel-body">
+        <table class="table table-hover table-striped">
+          <thead>
+            <tr>
+              <th>First Name</th>
+              <th>Last Name</th>
+              <th>Troop</th>
+              <th>Notes</th>
+              <th>Completion Record</th>
+              <th colspan="2"></th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <% Record.all.each do |record| %>
+              <% if record.course.name == @course.name && record.period == period &&
+                 !record.scout.nil? %>
+                <tr>
+                  <td> <%= record.scout.firstname %> </td>
+                  <td> <%= record.scout.lastname %> </td>
+                  <td> <%= record.scout.troop %> </td>
+                  <td> <%= record.scout.notes %> </td>
+                  <td> <%= record.completion %> </td>
+                  <td> <%= link_to "Edit Scout", edit_scout_path(record.scout) %></td>
+                  <td> <%= link_to "Edit Completion Record", edit_record_path(record) %></td>
+                </tr>
+              <% end %>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  <% end %>
+<% end %>

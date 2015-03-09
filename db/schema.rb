@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141020150751) do
+ActiveRecord::Schema.define(version: 20150302224721) do
 
   create_table "courses", force: true do |t|
     t.string   "name"
@@ -20,6 +20,25 @@ ActiveRecord::Schema.define(version: 20141020150751) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.decimal  "price"
+    t.integer  "capacity"
+    t.integer  "first_period"
+    t.integer  "second_period"
+    t.integer  "third_period"
+    t.integer  "event_id"
+  end
+
+  add_index "courses", ["event_id"], name: "index_courses_on_event_id"
+
+  create_table "events", force: true do |t|
+    t.string   "semester"
+    t.string   "year"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.boolean  "current",      default: false
+    t.decimal  "event_price"
+    t.decimal  "lunch_price"
+    t.decimal  "tshirt_price"
+    t.decimal  "patch_price"
   end
 
   create_table "preferences", force: true do |t|
@@ -28,14 +47,22 @@ ActiveRecord::Schema.define(version: 20141020150751) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "priority"
+    t.integer  "event_id"
   end
+
+  add_index "preferences", ["event_id"], name: "index_preferences_on_event_id"
 
   create_table "records", force: true do |t|
     t.integer  "scout_id"
     t.integer  "course_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "period"
+    t.string   "completion"
+    t.integer  "event_id"
   end
+
+  add_index "records", ["event_id"], name: "index_records_on_event_id"
 
   create_table "scouts", force: true do |t|
     t.string   "firstname"

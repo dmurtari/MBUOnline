@@ -6,7 +6,7 @@ class UsersController < ApplicationController
   before_action :already_signed_in, only: [:new]
 
   def index
-    @users = User.paginate(page: params[:page])
+    @users = User.reorder("lastname asc").page(params[:page]).per_page(40)
   end
 
   def show

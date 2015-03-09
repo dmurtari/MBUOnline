@@ -16,3 +16,8 @@ Production
 ----------
 
 MBU Online is currently hosted at mbuonline.herokuapp.com. 
+
+Database
+--------
+
+![ERD](erd.pdf)

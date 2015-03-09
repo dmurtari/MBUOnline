@@ -5,6 +5,7 @@ class User < ActiveRecord::Base
   # Actions to perform before saving to database
   before_save { email.downcase! }
   before_save :reformat_phone
+  before_save :calculate_total_cost
   before_create :create_remember_token
 
   # Validations on new user creation
@@ -38,11 +39,43 @@ class User < ActiveRecord::Base
   def calculate_total_cost
     total_cost = 0
 
+    if self.admin
+      Scout.all.each do |scout|
+        total_cost += scout.cost unless scout.cost.nil?
+      end
+    else
+      self.scouts.each do |scout|
+        total_cost += scout.cost unless scout.cost.nil?
+      end
+    end
+    
+    self.total_cost = total_cost
+  end
+
+
+  def lunch_cards
+    lunch_cards = 0
+
     self.scouts.each do |scout|
-      total_cost += scout.cost
+      lunch_cards += 1 if scout.scout_lunch
+      lunch_cards += scout.additional_lunch if scout.additional_lunch
     end
 
-    self.total_cost = total_cost
+    return lunch_cards
+  end
+
+  def scout_count
+    return Scout.where(user: self.id).count
+  end
+
+  def patch_count
+    patches = 0
+
+    self.scouts.each do |scout|
+      patches += 1 if scout.patch
+    end
+
+    return patches
   end
 
   private

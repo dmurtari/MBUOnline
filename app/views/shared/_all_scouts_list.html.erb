@@ -1,0 +1,109 @@
+<div class="table-responsive">
+  <table class="table table-hover table-striped">
+    
+    <thead>
+      <tr>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>Age</th>
+        <th>Troop</th>
+        <th>Emergency Contact</th>
+        <th>Notes</th>
+        <th>Preferred Courses</th>
+        <th>Assigned Courses</th>
+        <th>Cost of Attendance</th>
+        <th colspan="3"></th>
+      </tr>
+    </thead>
+    
+    <tbody>
+      <% scout_list = Scout.all if current_user.admin? %>
+      <% event = Event.where(current: true).last %>
+      <% scout_list.each do |scout| %>
+        <tr>
+          <td><%= scout.firstname %></td>
+          <td><%= scout.lastname %></td>
+          <td><%= scout.age %></td>
+          <td><%= scout.troop %></td>
+          <td>
+            <div class="dropdown">
+              <button class="btn btn-default btn-xs dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown">
+                Name: <%= scout.emergency_name %>
+                <span class="caret"></span>
+              </button>
+              <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+                <li role="presentation"><a role="menuitem" tabindex="-1" href="#">
+                  Phone: <%= scout.emergency_phone %></a></li>
+                <li role="presentation"><a role="menuitem" tabindex="-1" href="#">
+                  Relationship: <%= scout.emergency_relation %></a></li>
+              </ul>
+            </div>
+          </td>
+          <td>
+            <% if !scout.notes.nil? && !scout.notes.empty? %>
+              <div class="dropdown">
+                <button class="btn btn-default btn-xs dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown">
+                  <%= scout.notes[0..20] %>
+                  <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu2">
+                  <li role="presentation"><a role="menuitem" tabindex="-1" href="#"><%= scout.notes %></a></li>
+                </ul>
+              <% end %>
+            </div>
+          </td>
+          <td>
+
+            <% preferences = scout.preferences.where(event: event).order("priority asc") %>
+            <% if !preferences.empty? %>
+              <div class="dropdown">
+                <button class="btn btn-default btn-xs dropdown-toggle" type="button" id="dropdownMenu3" data-toggle="dropdown">
+                  <%= "#{preferences.first.course.name}" %>
+                  <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu3">
+                  <% preferences.each_with_index do |preference, index| %>
+                    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">
+                    <%= "#{preference.priority.ordinalize} Priority:" unless preference.priority.nil? %>
+                    <%= link_to preference.course.name, preference.course %></a></li>
+                    <% unless index == preferences.size - 1 %>
+                      <li class="divider">
+                    <% end %>
+                      </li>
+                  <% end %>
+                </ul>
+              </div>
+            <% end %>
+          </td>
+          <td>
+            <% records = scout.records.where(event: event).order("period asc") %>
+            <% if !records.empty? %>
+              <div class="dropdown">
+                <button class="btn btn-default btn-xs dropdown-toggle" type="button" id="dropdownMenu3" data-toggle="dropdown">
+                  <%= "#{records.first.course.name}" %>
+                  <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu3">
+                  <% records.each_with_index do |record, index| %>
+                    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">
+                    <%= "#{record.period.ordinalize} Period:" unless record.period.nil? %>
+                    <%= link_to record.course.name, record.course %></a></li>
+                    <% unless index == records.size - 1 %>
+                      <li class="divider">
+                    <% end %>
+                      </li>
+                  <% end %>
+                </ul>
+              </div>
+            <% end %>
+          </td>
+          <td><%= number_to_currency scout.cost %>
+          <td><%= link_to 'Details', scout %></td>
+          <td><%= link_to 'Edit Scout', edit_scout_path(scout) %></td>
+          <td><%= link_to 'Delete', scout, method: :delete, data: { confirm: 'Are you sure? This action can\'t be reversed'} %></td>
+        </tr> 
+      <% end %>  
+    </tbody>
+  
+  </table>
+</div>
