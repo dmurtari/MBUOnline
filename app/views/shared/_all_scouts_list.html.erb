@@ -1,3 +1,7 @@
+<% scout_list = Scout.all.reorder("lastname asc").page(params[:page]).per_page(40) if current_user.admin? %>
+
+<%= will_paginate scout_list %>
+
 <div class="table-responsive">
   <table class="table table-hover table-striped">
     
@@ -17,7 +21,6 @@
     </thead>
     
     <tbody>
-      <% scout_list = Scout.all if current_user.admin? %>
       <% event = Event.where(current: true).last %>
       <% scout_list.each do |scout| %>
         <tr>

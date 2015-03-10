@@ -5,6 +5,8 @@
   <h1>Your Scouts <%= link_to "Add a scout", new_scout_path, class: "btn btn-lg btn-default pull-right" %></h1>
 </div>
 
+<% will_paginate @scout %>
+
 <% if !current_user.admin? %>
   <%= render 'shared/scouts_list' %>
 <% else %>

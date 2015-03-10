@@ -4,7 +4,7 @@ class ScoutsController < ApplicationController
                                    :preferred_courses, :show]
 
   def index
-    @scout = Scout.paginate(page: params[:page])
+    @scout = Scout.reorder("lastname asc").page(params[:page]).per_page(40)
   end
 
   def show

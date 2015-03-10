@@ -1,3 +1,8 @@
+<% scout_list = Scout.where(user_id: params[:id]).reorder("lastname asc").page(params[:page]).per_page(40) if current_user.admin? %>
+<% scout_list = current_user.scouts.reorder("lastname asc").page(params[:page]).per_page(40) if !current_user.admin?%>
+
+<%= will_paginate scout_list %>
+
 <div class="table-responsive">
   <table class="table table-hover table-striped">
     
@@ -18,8 +23,6 @@
     </thead>
     
     <tbody>
-      <% scout_list = Scout.where(user_id: params[:id]) if current_user.admin? %>
-      <% scout_list = current_user.scouts if !current_user.admin?%>
       <% event = Event.where(current: true).last %>
       <% scout_list.each do |scout| %>
         <tr>
