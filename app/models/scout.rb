@@ -5,7 +5,8 @@ class Scout < ActiveRecord::Base
   has_many :preferences
   has_many :preferred_courses, through: :preferences, source: :course, dependent: :destroy
 
-  before_save :reformat_phone, :calculate_age, :calculate_costs
+  before_save :reformat_phone, :calculate_age
+  after_save :calculate_costs
 
   belongs_to :user
   validates :user_id, :firstname, :lastname, :dob, :emergency_relation,
@@ -64,7 +65,7 @@ class Scout < ActiveRecord::Base
     event = Event.where(current: true).last
     
     if !preferences_for?(event) 
-      self.cost = 0
+      update_columns(cost: 0)
     else
       cost = 15
       
@@ -76,7 +77,7 @@ class Scout < ActiveRecord::Base
         cost += record.course.price unless record.course.price.nil?
       end
 
-      self.cost = cost
+      update_columns(cost: cost)
     end
   end
 
