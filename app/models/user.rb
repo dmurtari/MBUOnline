@@ -5,7 +5,7 @@ class User < ActiveRecord::Base
   # Actions to perform before saving to database
   before_save { email.downcase! }
   before_save :reformat_phone
-  before_save :calculate_total_cost
+  after_save :calculate_total_cost
   before_create :create_remember_token
 
   # Validations on new user creation
