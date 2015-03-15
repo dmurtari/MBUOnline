@@ -49,7 +49,7 @@ class User < ActiveRecord::Base
       end
     end
     
-    self.total_cost = total_cost
+    update_columns(total_cost: total_cost)
   end
 
 

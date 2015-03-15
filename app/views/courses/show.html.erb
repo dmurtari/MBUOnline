@@ -34,6 +34,7 @@
 
 <% if current_user.admin? %>
   <% periods = [1, 2, 3] %>
+  <% event = Event.where(current: true).last %>
   <% periods.each do |period| %>
     <div class="panel panel-default">    
       <div class="panel-heading">
@@ -53,7 +54,7 @@
           </thead>
 
           <tbody>
-            <% Record.all.each do |record| %>
+            <% Record.where(event: event).each do |record| %>
               <% if record.course.name == @course.name && record.period == period &&
                  !record.scout.nil? %>
                 <tr>
