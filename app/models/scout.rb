@@ -78,6 +78,7 @@ class Scout < ActiveRecord::Base
       end
 
       update_columns(cost: cost)
+      self.user.calculate_total_cost
     end
   end
 
