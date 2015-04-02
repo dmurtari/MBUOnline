@@ -6,6 +6,8 @@
         <th>First Name</th>
         <th>Last Name</th>
         <th>Troop</th>
+        <th>Lunch Cards</th>
+        <th>T-Shirt</th>
         <th>Period 1</th>
         <th>Period 2</th>
         <th>Period 3</th>
@@ -13,17 +15,22 @@
     </thead>
     
     <tbody>
+      <% event = Event.where(current: true).last %>
       <% scout_list = Scout.where(user_id: params[:id]) if current_user.admin? %>
       <% scout_list = current_user.scouts if !current_user.admin?%>
-      <% event = Event.where(current: true).last %>
       <% scout_list.each do |scout| %>
-      <% first_period = scout.records.where(period: 1, event: event).first.course if scout.records.where(period: 1, event: event).first %>
-      <% second_period = scout.records.where(period: 2, event: event).first.course if scout.records.where(period: 2, event: event).first %>
-      <% third_period = scout.records.where(period: 3, event: event).first.course if scout.records.where(period: 3, event: event).first %>
+        <% next unless scout.records_for? event %>
+        <% first_period = scout.records.where(period: 1, event: event).first.course if scout.records.where(period: 1, event: event).first %>
+        <% second_period = scout.records.where(period: 2, event: event).first.course if scout.records.where(period: 2, event: event).first %>
+        <% third_period = scout.records.where(period: 3, event: event).first.course if scout.records.where(period: 3, event: event).first %>
+        <% lunch_cards = 1 if scout.scout_lunch %>
+        <% lunch_cards += scout.additional_lunch if scout.additional_lunch %>
         <tr>
           <td><%= scout.firstname %></td>
           <td><%= scout.lastname %></td>
           <td><%= scout.troop %></td>
+          <td><%= lunch_cards %></td>
+          <td><%= scout.shirt ? "Yes, #{scout.shirt_size}" : "No" %></td>
           <td><%= "#{first_period.name}, #{first_period.room}" if first_period %></td>
           <td><%= "#{second_period.name}, #{second_period.room}" if second_period %></td>
           <td><%= "#{third_period.name}, #{third_period.room}" if third_period %></td>

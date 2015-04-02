@@ -62,7 +62,7 @@
     <div class="panel-heading">
       <h3 class="panel-title">
       <% if current_user.admin? %>
-        <%= "#{@user.firstname}'s Scouts" %>
+        <%= "#{@user.firstname}'s Scouts (Troop #{@user.troop})" %>
       <% else %>
         Your scouts
       <% end %> 
@@ -77,7 +77,7 @@
     <div class="panel-heading">
       <h3 class="panel-title">
       <% if current_user.admin? %>
-        <%= "#{@user.firstname} #{@user.lastname}'s Roster" %>
+        <%= "#{@user.firstname} #{@user.lastname}'s Roster (Troop #{@user.troop})" %>
       <% else %>
         Your Roster
       <% end %> 
@@ -88,7 +88,10 @@
     </h5>
     <h5 class="text-center">
       <strong>Total registered scouts:</strong>
-      <%= @user.scout_count %>      
+      <% event = Event.where(current: true).last %>
+      <% scout_count = 0 %>
+      <% @user.scouts.each { |scout| scout_count += 1 if scout.records_for? event} %>
+      <%= scout_count %>      
     </h5>
     <%= render 'shared/scouts_roster' %>
   </div>
