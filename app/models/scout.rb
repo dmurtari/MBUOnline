@@ -11,7 +11,7 @@ class Scout < ActiveRecord::Base
   belongs_to :user
   validates :user_id, :firstname, :lastname, :dob, :emergency_relation,
             :emergency_name, presence: true
-            
+
   VALID_PHONE_REGEX = /\d{3}.*\d{3}.*\d{4}/
   validates :emergency_phone, presence: true, format: { with: VALID_PHONE_REGEX }
 
@@ -63,14 +63,14 @@ class Scout < ActiveRecord::Base
 
   def calculate_costs
     event = Event.where(current: true).last
-    
-    if !preferences_for?(event) && !records_for?(event) 
+
+    if !preferences_for?(event) && !records_for?(event)
       update_columns(cost: 0)
     else
       cost = 15
-      
-      cost += 10 if self.scout_lunch
-      cost += (self.additional_lunch * 10) if self.additional_lunch
+
+      cost += 12.5 if self.scout_lunch
+      cost += (self.additional_lunch * 12.5) if self.additional_lunch
       cost += 10 if self.shirt
 
       self.records.where(event: event).each do |record|
@@ -90,7 +90,7 @@ class Scout < ActiveRecord::Base
 
     def calculate_age
       now = Time.now.utc.to_date
-      self.age = now.year - self.dob.year - ((now.month > self.dob.month || 
+      self.age = now.year - self.dob.year - ((now.month > self.dob.month ||
         (now.month == self.dob.month && now.day >= self.dob.day)) ? 0 : 1)
     end
 end
