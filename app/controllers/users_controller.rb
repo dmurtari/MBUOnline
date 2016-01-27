@@ -32,7 +32,13 @@ class UsersController < ApplicationController
 
   def update
     user = User.find_by(email: current_user.email).try(:authenticate, params[:current_password])
-    if user && @user.update(user_params)
+
+    if params[:admin]
+      flash.now[:danger] = "Unable to change admin privileges"
+      render :edit
+    end
+
+    if (user || current_user.admin?) && @user.update(user_params)
       flash[:success] = "Profile updated"
       redirect_to @user
     else
@@ -56,7 +62,7 @@ class UsersController < ApplicationController
 
     def user_params
       params.require(:user).permit(:firstname, :lastname, :troop, :district, :council, :phone,
-                                   :email, :password, :password_confirmation)
+                                   :email, :password, :password_confirmation, :admin)
     end
 
     def correct_user

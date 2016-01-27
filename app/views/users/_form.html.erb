@@ -3,7 +3,7 @@
     <% if @user.errors.any? %>
       <%= render 'shared/user_error_messages' %>
     <% end %>
-    
+
     <div class="panel panel-default">
       <div class="panel-heading">
         <h3 class="panel-title">Your Information</h3>
@@ -18,7 +18,7 @@
           <%= f.text_field :lastname, class: "form-control", placeholder: "Enter your last name" %>
         </div>
 
-        <div class="form-group col-md-6">  
+        <div class="form-group col-md-6">
           <%= f.label :email %>
           <%= f.email_field :email, class: "form-control", placeholder: "you@example.com" %>
         </div>
@@ -59,9 +59,21 @@
       </div>
     </div>
 
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title">Make this user an Administrator</h3>
+      </div>
+      <div class="panel-body">
+        <div class="form-group col-md-6">
+          <%= f.label :admin, "Administrator?" %>
+          <%= f.check_box :admin, class: "form-control" %>
+        </div>
+      </div>
+    </div>
+
     <div class="col-md-6 col-md-offset-3">
       <%= f.label "Enter Current Password to Save Changes" %>
-      <%= password_field_tag :current_password, params[:current_password], 
+      <%= password_field_tag :current_password, params[:current_password],
           class: "form-control", placeholder: "Current password"%>
     </div>
     <div class="actions col-md-6 col-md-offset-3"></div>
