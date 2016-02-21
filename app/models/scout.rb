@@ -57,6 +57,10 @@ class Scout < ActiveRecord::Base
     preferences.where(event: event).any?
   end
 
+  def preferences_count(event)
+    preferences.where(event:event).count
+  end
+
   def records_for?(event)
     records.where(event: event).any?
   end
@@ -67,7 +71,13 @@ class Scout < ActiveRecord::Base
     if !preferences_for?(event) && !records_for?(event)
       update_columns(cost: 0)
     else
-      cost = 15
+      cost = 0
+
+      if preferences_count(event) >= 3
+        cost += 18
+      else
+        cost += preferences_count(event) * 6
+      end
 
       cost += 12.5 if self.scout_lunch
       cost += (self.additional_lunch * 12.5) if self.additional_lunch
@@ -79,6 +89,7 @@ class Scout < ActiveRecord::Base
 
       update_columns(cost: cost)
       self.user.calculate_total_cost
+      cost
     end
   end
 

@@ -103,7 +103,13 @@
       <table class="table table-condensed">
         <tr>
           <td>Registration Fee</td>
-          <td><%= number_to_currency 15 %></td>
+          <td>
+            <% if @scout.preferences_count(event) > 3 %>
+              <%= number_to_currency 18 %>
+            <% else %>
+              <%= number_to_currency 6 * @scout.preferences_count(event) %>
+            <% end %>
+          </td>
         </tr>
         <tr>
           <td>Scout Lunch Cost</td>
@@ -141,7 +147,7 @@
         </table>
        <% end %>
 
-      <h4>Total: <%= number_to_currency @scout.cost %></h4>
+      <h4>Total: <%= number_to_currency @scout.calculate_costs %></h4>
     <% else %>
       <strong><%= "Scout does not have any class preferences and/or does not have any records for the current event (#{event.semester} #{event.year})" %></strong>
     <% end %>
