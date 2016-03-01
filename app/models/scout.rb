@@ -67,6 +67,7 @@ class Scout < ActiveRecord::Base
 
   def calculate_costs
     event = Event.where(current: true).last
+    calculate_age
 
     if !preferences_for?(event) && !records_for?(event)
       update_columns(cost: 0)
@@ -79,8 +80,13 @@ class Scout < ActiveRecord::Base
         cost += preferences_count(event) * 6
       end
 
-      cost += 12.5 if self.scout_lunch
-      cost += (self.additional_lunch * 12.5) if self.additional_lunch
+      if self.scout_lunch && (self.age >  12 || self.age < 3)
+        cost += 10.5
+      elsif self.scout_lunch
+        cost += 9
+      end
+
+      cost += (self.additional_lunch * 10.5) if self.additional_lunch
       cost += 10 if self.shirt
 
       self.records.where(event: event).each do |record|

@@ -1,6 +1,6 @@
 class ScoutsController < ApplicationController
   before_action :signed_in_user
-  before_action :set_scout, only: [:edit, :create, :update, :destroy, 
+  before_action :set_scout, only: [:edit, :create, :update, :destroy,
                                    :preferred_courses, :show]
 
   def index
@@ -62,7 +62,7 @@ class ScoutsController < ApplicationController
     def scout_params
       params.require(:scout).permit(:firstname, :lastname, :dob, :emergency_relation,
                                     :emergency_name, :emergency_phone, :notes,
-                                    :preferred_courses, :troop, :scout_lunch, 
+                                    :preferred_courses, :troop, :scout_lunch,
                                     :additional_lunch, :patch, :shirt, :shirt_size,
                                     :cost)
     end

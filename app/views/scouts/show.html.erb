@@ -112,14 +112,18 @@
           </td>
         </tr>
         <tr>
-          <td>Scout Lunch Cost</td>
+          <td>Scout Lunch Cost (Please make sure birthday is correct to ensure accuracy)</td>
           <td>
-            <%= number_to_currency 12.50 if @scout.scout_lunch%>
+            <% if (@scout.age > 12 || @scout.age < 3) && @scout.scout_lunch %>
+              <%= number_to_currency 10.50 %>
+            <% elsif @scout.scout_lunch %>
+              <%= number_to_currency 9 %>
+            <% end %>
           </td>
         </tr>
         <tr>
           <td>Additional Lunch Cost</td>
-          <td><%= number_to_currency @scout.additional_lunch * 12.50 if @scout.additional_lunch %></td>
+          <td><%= number_to_currency @scout.additional_lunch * 10.50 if @scout.additional_lunch %></td>
         </tr>
         <tr>
           <td>T-Shirt</td>
