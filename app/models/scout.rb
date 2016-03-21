@@ -74,7 +74,7 @@ class Scout < ActiveRecord::Base
     else
       cost = 0
 
-      if !self.records.where(event: event)
+      if !records_for?(event)
         if preferences_count(event) >= 3
           cost += 18
         else
