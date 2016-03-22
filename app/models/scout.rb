@@ -74,14 +74,6 @@ class Scout < ActiveRecord::Base
     else
       cost = 0
 
-      if !records_for?(event)
-        if preferences_count(event) >= 3
-          cost += 18
-        else
-          cost += preferences_count(event) * 6
-        end
-      end
-
       if self.scout_lunch && (self.age >  12 || self.age < 3)
         cost += 10.5
       elsif self.scout_lunch
