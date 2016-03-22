@@ -59,17 +59,19 @@
       </div>
     </div>
 
-    <div class="panel panel-default">
-      <div class="panel-heading">
-        <h3 class="panel-title">Make this user an Administrator</h3>
-      </div>
-      <div class="panel-body">
-        <div class="form-group col-md-6">
-          <%= f.label :admin, "Administrator?" %>
-          <%= f.check_box :admin, class: "form-control" %>
+    <% if current_user.admin? %>
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h3 class="panel-title">Make this user an Administrator</h3>
+        </div>
+        <div class="panel-body">
+          <div class="form-group col-md-6">
+            <%= f.label :admin, "Administrator?" %>
+            <%= f.check_box :admin, class: "form-control" %>
+          </div>
         </div>
       </div>
-    </div>
+    <% end %>
 
     <div class="col-md-6 col-md-offset-3">
       <%= f.label "Enter Current Password to Save Changes" %>
