@@ -101,7 +101,7 @@
 
     <% if @scout.preferences_for?(event) || @scout.records_for?(event) %>
       <table class="table table-condensed">
-        <tr>
+        <!-- <tr>
           <td>Registration Fee</td>
           <td>
             <% if @scout.preferences_count(event) > 3 %>
@@ -110,7 +110,7 @@
               <%= number_to_currency 6 * @scout.preferences_count(event) %>
             <% end %>
           </td>
-        </tr>
+        </tr> -->
         <tr>
           <td>Scout Lunch Cost (Please make sure birthday is correct to ensure accuracy)</td>
           <td>
