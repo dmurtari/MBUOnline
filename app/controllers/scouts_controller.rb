@@ -21,6 +21,7 @@ class ScoutsController < ApplicationController
   def create
     @scout = current_user.scouts.build(scout_params)
     if @scout.save
+      @scout.calculate_costs
       flash[:success] = "#{@scout.firstname} has been registered"
       redirect_to current_user
     else
@@ -30,6 +31,7 @@ class ScoutsController < ApplicationController
 
   def update
     if @scout.update(scout_params)
+      @scout.calculate_costs
       flash[:success] = "#{@scout.firstname}'s information has been updated"
       redirect_to current_user
     else
