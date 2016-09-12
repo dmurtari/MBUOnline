@@ -72,7 +72,7 @@ class Scout < ActiveRecord::Base
     if !preferences_for?(event) && !records_for?(event)
       update_columns(cost: 0)
     else
-      cost = 0
+      cost = 18
 
       if self.scout_lunch && (self.age >  12 || self.age < 3)
         cost += 10.5
